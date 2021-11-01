@@ -21,8 +21,8 @@ namespace BankingProgram
         /// <param name="WhatDataChanged"></param>
         /// <param name="TypeChange"></param>
         /// <param name="WhoChangedData"></param>
-        public Manager(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData)
-            : base (Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, DateTimeEntryModified, WhatDataChanged, TypeChange, WhoChangedData)
+        public Manager(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
+            : base (Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, DateTimeEntryModified, WhatDataChanged, TypeChange, WhoChangedData, СonsultantСheck)
         {
             
         }
@@ -72,8 +72,8 @@ namespace BankingProgram
         public override void AddEntry(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
             var data = DateTime.Now;
-            user.Add(new Manager(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер"));
-            user.Add(new ConsultantUsers(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер"));
+            user.Add(new Manager(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", false));
+            user.Add(new ConsultantUsers(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
         }
 
     }

@@ -7,17 +7,52 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
-        Width="800"
+        Width="1250"
         MinHeight="400"
         MinWidth="750">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
+
+        <ListView x:Name="lvWorkers" 
+                  Grid.Column="1" 
+                  Margin="10"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding MiddleName}"/>
+                    <GridViewColumn Header="Номер телефона" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Серия и № паспорта" DisplayMemberBinding="{Binding SeriesNumberPassport}"/>
+                    <GridViewColumn Header="Дата изменения" DisplayMemberBinding="{Binding DateTimeEntryModified}"/>
+                    <GridViewColumn Header="Что изменено" DisplayMemberBinding="{Binding WhatDataChanged}"/>
+                    <GridViewColumn Header="Тип изменения" DisplayMemberBinding="{Binding TypeChange}"/>
+                    <GridViewColumn Header="Кто изменил" DisplayMemberBinding="{Binding WhoChangedData}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel 
+            HorizontalAlignment="Stretch" 
+            Margin="10" 
+            VerticalAlignment="Stretch">
+            <ComboBox x:Name="userWPF"
+                Margin="10" SelectionChanged="userWPF_SelectionChanged">
+                <ComboBoxItem>
+                    <TextBlock Text="Консультант"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Text="Менеджер"/>
+                </ComboBoxItem>
+            </ComboBox>
+
+        </StackPanel>
     </Grid>
 </Window>

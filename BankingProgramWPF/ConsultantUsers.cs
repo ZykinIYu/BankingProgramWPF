@@ -73,7 +73,7 @@ namespace BankingProgram
         /// <param name="MiddleName">Отчество</param>
         /// <param name="PhoneNumber">Номер телефона</param>
         /// <param name="SeriesNumberPassport">серия и номер паспорта</param>
-        public ConsultantUsers(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData)
+        public ConsultantUsers(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
         {
             this.Id = Id;
             this.Surname = Surname;
@@ -85,6 +85,11 @@ namespace BankingProgram
             this.WhatDataChanged = WhatDataChanged;
             this.TypeChange = TypeChange;
             this.WhoChangedData = WhoChangedData;
+
+            if (СonsultantСheck == true)
+            {
+                this.SeriesNumberPassport = HidingSeriesAndNumberPassport();
+            }           
         }
 
         /// <summary>

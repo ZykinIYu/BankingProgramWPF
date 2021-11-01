@@ -10,7 +10,7 @@ namespace BankingProgram
 {
     class WorkProcess
     {
-        private List<Users> user;
+        public List<Users> user;
         private ulong id;
         private Random randomize;
         private string proofWork;
@@ -41,8 +41,8 @@ namespace BankingProgram
             user = new List<Users>();
             randomize = new Random();
             FillingCollectionWithUsers();
-            LoginName();
-            PrintDocument();
+            //LoginName();
+            //PrintDocument();
         }
 
         /// <summary>
@@ -73,12 +73,15 @@ namespace BankingProgram
         /// <summary>
         /// Метод для наполнения коллекции пользователями
         /// </summary>
-        private void FillingCollectionWithUsers()
+        public void FillingCollectionWithUsers()
         {
             for (int i = 0; i < 21; i++)
             {
-                user.Add(new ConsultantUsers(NumberId(), $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", Convert.ToString(80000000000 + randomize.Next(800000000, 900000000)), Convert.ToString(1000000000 + randomize.Next(100000000, 999999999)), DateTime.Now, "-", "Добавлена новая запись", "SysAdmin"));
-                user.Add(new Manager(NumberId() - 1, $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", Convert.ToString(80000000000 + randomize.Next(800000000, 900000000)), Convert.ToString(1000000000 + randomize.Next(100000000, 999999999)), DateTime.Now, "-", "Добавлена новая запись", "SysAdmin"));
+                var userPhoneNumber = Convert.ToString(80000000000 + randomize.Next(800000000, 900000000));
+                var userSeriesNumberPassport = Convert.ToString(1000000000 + randomize.Next(100000000, 999999999));
+                var userDateTimeNow = DateTime.Now;
+                user.Add(new ConsultantUsers(NumberId(), $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", true));
+                user.Add(new Manager(NumberId() - 1, $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", false));
             }
         }
 

@@ -27,7 +27,7 @@ namespace BankingProgram
         string Name { get; set; }
 
         /// <summary>
-        /// Свойство для чтения фамилии пользователя
+        /// Свойство для чтения отчества пользователя
         /// </summary>
         string MiddleName { get; set; }
 
@@ -37,7 +37,7 @@ namespace BankingProgram
         string PhoneNumber { get; set; }
 
         /// <summary>
-        /// Свойство чтения и записи номера телефона
+        /// Свойство чтения и записи серии и номера паспорта
         /// </summary>
         string SeriesNumberPassport { get; set; }
 
