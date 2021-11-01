@@ -51,10 +51,5 @@ namespace BankingProgramWPF
                 lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(ConsultantUsers));
             }
         }
-
-        private void userWPF_SelectionChanged(object sender, TextCompositionEventArgs e)
-        {
-
-        }
     }
 }
