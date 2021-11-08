@@ -39,7 +39,7 @@ namespace BankingProgram
         /// </summary>
         public void FillingCollectionWithUsers()
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 21; i++)
             {
                 var userPhoneNumber = Convert.ToString(80000000000 + randomize.Next(800000000, 900000000));
                 var userSeriesNumberPassport = Convert.ToString(1000000000 + randomize.Next(100000000, 999999999));
@@ -53,7 +53,7 @@ namespace BankingProgram
         /// Метод определяющий наибольший Id и увеличивающий его на 1
         /// </summary>
         /// <returns></returns>
-        private ulong NumberId()
+        public ulong NumberId()
         {
             id = 0;
             for (int i = 0; i < user.Count; i++)
@@ -143,13 +143,5 @@ namespace BankingProgram
             }
         }
 
-        /// <summary>
-        /// Добавление нового пользователя
-        /// </summary>
-        public void AddNewUser(string NewSurname, string NewName, string NewMiddleName, string NewPhoneNumber, string NewSeriesNumberPassport)
-        {
-            //user[user.Count - 1].AddEntry(NumberId(), NewSurname, NewName, NewMiddleName, NewPhoneNumber, NewSeriesNumberPassport, user);
-            (user[user.Count - 1] as Manager).AddEntry(NumberId(), NewSurname, NewName, NewMiddleName, NewPhoneNumber, NewSeriesNumberPassport, user);
-        }
     }
 }

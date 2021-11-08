@@ -69,11 +69,19 @@ namespace BankingProgram
         /// <param name="PhoneNumber">Номер телефона</param>
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей</param>
-        public override void AddEntry(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public new static void AddEntry(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
             var data = DateTime.Now;
             user.Add(new Manager(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", false));
             user.Add(new ConsultantUsers(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
+        }
+
+        /// <summary>
+        /// Удаление записи
+        /// </summary>
+        public new static void RemoveEntry(ulong id, List<Users> user)
+        {
+            user.RemoveAll(us => us.Id == id);
         }
 
     }

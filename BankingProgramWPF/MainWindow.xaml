@@ -110,7 +110,7 @@
             <Button 
                 x:Name="addUser"
                 Content="Добавить"
-                Margin="10 0 10 10" Click="Button_ClickaddUser"/>
+                Margin="10 0 10 10" Click="Button_ClickAddUser"/>
 
             <Button
                 x:Name="create"
@@ -119,8 +119,9 @@
                 Click="Button_ClickCreate"/>
 
             <Button 
+                x:Name="remove"
                 Content="Удалить"
-                Margin="10 0 10 10"/>
+                Margin="10 0 10 10" Click="Button_ClickRemove"/>
 
             <Button 
                 Content="Сортировать по алфавиту"

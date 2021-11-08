@@ -110,7 +110,6 @@ namespace BankingProgramWPF
                         }
 
                         workProcess.ChangingParametersManager(userChange[0], userChange[1], userChange[2], userChange[3], userChange[4], userChange[5], changedFields);
-                        MessageBox.Show("Внимане!");
                     }
                 }
             }
@@ -151,13 +150,9 @@ namespace BankingProgramWPF
                         }
 
                         workProcess.ChangingParametersConsultant(userChange[0], userChange[4], changedFields);
-                        MessageBox.Show("Внимане!");
                     }
                 }
             }
-
-
-
 
             lvWorkers.Items.Refresh();
         }
@@ -167,7 +162,7 @@ namespace BankingProgramWPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_ClickaddUser(object sender, RoutedEventArgs e)
+        private void Button_ClickAddUser(object sender, RoutedEventArgs e)
         {
             string[] userChange = new string[5];
             userChange[0] = surnameTB.Text;
@@ -178,7 +173,7 @@ namespace BankingProgramWPF
 
             if (userWPF.Text == "Консультант")
             {
-                workProcess.AddNewUser(userChange[0], userChange[1], userChange[2], userChange[3], userChange[4]);
+                Manager.AddEntry(workProcess.NumberId(), userChange[0], userChange[1], userChange[2], userChange[3], userChange[4], workProcess.user);
                 lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
             }
 
@@ -186,6 +181,29 @@ namespace BankingProgramWPF
             {
                 MessageBox.Show("Консультанту запрещено добавлять пользователей");
             }
+        }
+
+        /// <summary>
+        /// Клик для удаления пользователя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_ClickRemove(object sender, RoutedEventArgs e)
+        {
+            string[] userChange = new string[1];
+            userChange[0] = idTB.Text;
+
+            if (userWPF.Text == "Консультант")
+            {
+                Manager.RemoveEntry(Convert.ToUInt64(userChange[0]), workProcess.user);
+                lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
+            }
+
+            if (userWPF.Text == "Менеджер")
+            {
+                MessageBox.Show("Консультанту запрещено удалять пользователей");
+            }
+
         }
     }
 }

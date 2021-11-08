@@ -89,5 +89,10 @@ namespace BankingProgram
         /// </summary>
         void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user);
 
+        /// <summary>
+        /// Удаление записи записи
+        /// </summary>
+        void RemoveEntry(ulong id, List<Users> user);
+
     }
 }

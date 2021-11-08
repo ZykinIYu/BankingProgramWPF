@@ -142,8 +142,15 @@ namespace BankingProgram
         /// </summary>
         public virtual void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
-            //Console.WriteLine("У консультанта нет возможности добавлять пользователей");
-            MessageBox.Show("Консультанту запрещено добавлять пользователей111111");
+            MessageBox.Show("Консультанту запрещено добавлять пользователей");
+        }
+
+        /// <summary>
+        /// Удаление записи
+        /// </summary>
+        public virtual void RemoveEntry(ulong id, List<Users> user)
+        {
+            MessageBox.Show("Консультанту запрещено удалять пользователей пользователей");
         }
 
     }
