@@ -23,7 +23,7 @@ namespace BankingProgramWPF
     public partial class MainWindow : Window
     {
         WorkProcess workProcess;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace BankingProgramWPF
             Debug.WriteLine(userWPF.Text);
             //lvWorkers.ItemsSource = workProcess.user;
             //lvWorkers.Items.Refresh();
-        }
+    }
 
         /// <summary>
         /// Событие при изменении поля с выпадающим списком
