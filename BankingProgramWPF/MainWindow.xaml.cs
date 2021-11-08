@@ -179,9 +179,8 @@ namespace BankingProgramWPF
             if (userWPF.Text == "Консультант")
             {
                 workProcess.AddNewUser(userChange[0], userChange[1], userChange[2], userChange[3], userChange[4]);
+                lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
             }
-
-            lvWorkers.Items.Refresh();
 
             if (userWPF.Text == "Менеджер")
             {
