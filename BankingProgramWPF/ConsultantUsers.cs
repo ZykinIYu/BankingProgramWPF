@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BankingProgram
 {
@@ -141,8 +142,8 @@ namespace BankingProgram
         /// </summary>
         public virtual void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
-            Console.WriteLine("У консультанта нет возможности добавлять пользователей");
-            Console.ReadKey();
+            //Console.WriteLine("У консультанта нет возможности добавлять пользователей");
+            MessageBox.Show("Консультанту запрещено добавлять пользователей111111");
         }
 
     }
