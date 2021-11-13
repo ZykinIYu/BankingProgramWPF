@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bindable.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="WorkProcess.cs" />
     <Page Include="MainWindow.xaml">
