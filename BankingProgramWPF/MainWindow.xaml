@@ -63,7 +63,7 @@
             <TextBlock 
                 x:Name="idTB"
                 Margin="10 0 10 10"
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Id}"/>
+                Text="{Binding Id}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
