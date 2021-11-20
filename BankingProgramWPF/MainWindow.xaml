@@ -24,7 +24,8 @@
                   Margin="10"
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
-                  DataContext="{Binding SelectedUser}">
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
@@ -43,7 +44,8 @@
         <StackPanel 
             HorizontalAlignment="Stretch" 
             Margin="10" 
-            VerticalAlignment="Stretch">
+            VerticalAlignment="Stretch"
+            DataContext="{Binding SelectedUser}">
             <ComboBox
                 x:Name="userWPF"
                 Margin="10" 
@@ -70,7 +72,7 @@
             <TextBox 
                 x:Name="surnameTB"
                 Margin="10 0 10 10" 
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Surname, Mode=OneWay}"/>
+                Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -79,7 +81,7 @@
             <TextBox 
                 x:Name="nameTB"
                 Margin="10 0 10 10"
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.Name, Mode=OneWay}"/>
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -88,7 +90,7 @@
             <TextBox 
                 x:Name="middleNameTB"
                 Margin="10 0 10 10"
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.MiddleName, Mode=OneWay}"/>
+                Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -97,7 +99,7 @@
             <TextBox 
                 x:Name="phoneNumberTB"
                 Margin="10 0 10 10"
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.PhoneNumber, Mode=OneWay}"/>
+                Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -106,7 +108,7 @@
             <TextBox 
                 x:Name="seriesNumberPassportTB"
                 Margin="10 0 10 10"
-                Text="{Binding ElementName=lvWorkers, Path=SelectedItem.SeriesNumberPassport, Mode=OneWay}"/>
+                Text="{Binding SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
             <Button 
                 x:Name="addUser"

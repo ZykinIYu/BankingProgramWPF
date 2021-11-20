@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,38 +8,97 @@ using System.Windows;
 
 namespace BankingProgram
 {
-    class ConsultantUsers : Users
+    class ConsultantUsers : Users, INotifyPropertyChanged
     {
+        private ulong id;
 
         /// <summary>
         /// Свойство чтения и записи идентификатора
         /// </summary>
-        public ulong Id { get; set; }
+        public ulong Id 
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        private string surname;
 
         /// <summary>
         /// Свойство для чтения фамилии пользователя
         /// </summary>
-        public string Surname { get; set; }
+        public string Surname 
+        {
+            get { return surname; }
+            set
+            {
+                surname = value;
+                OnPropertyChanged("Surname");
+            }
+        }
+
+        private string name;
 
         /// <summary>
         /// свойствр для чтения имени пользователя
         /// </summary>
-        public string Name { get; set; }
+        public string Name 
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private string middleName;
 
         /// <summary>
         /// Свойство для чтения отчества пользователя
         /// </summary>
-        public string MiddleName { get; set; }
+        public string MiddleName 
+        {
+            get { return middleName; }
+            set
+            {
+                middleName = value;
+                OnPropertyChanged("MiddleName");
+            }
+        }
+
+        private string phoneNumber;
 
         /// <summary>
         /// Свойство чтения и записи номера телефона
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber 
+        {
+            get { return phoneNumber; }
+            set
+            {
+                phoneNumber = value;
+                OnPropertyChanged("PhoneNumber");
+            }
+        }
+
+        private string seriesNumberPassport;
 
         /// <summary>
         /// Свойство чтения и записи номера телефона
         /// </summary>
-        public string SeriesNumberPassport { get; set; }
+        public string SeriesNumberPassport 
+        {
+            get { return seriesNumberPassport; }
+            set
+            {
+                seriesNumberPassport = value;
+                OnPropertyChanged("SeriesNumberPassport");
+            }
+        }
 
         /// <summary>
         /// Свойство поля дата и время изменения записи
@@ -151,6 +211,13 @@ namespace BankingProgram
         public virtual void RemoveEntry(ulong id, List<Users> user)
         {
             MessageBox.Show("Консультанту запрещено удалять пользователей пользователей");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

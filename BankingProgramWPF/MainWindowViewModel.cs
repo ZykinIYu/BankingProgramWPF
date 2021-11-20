@@ -1,16 +1,18 @@
 ﻿using BankingProgram;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BankingProgramWPF
 {
-    class MainWindowViewModel : Bindable
+    class MainWindowViewModel : INotifyPropertyChanged
     {
-        public List<Users> User;
+        public List<Users> User { get; set; }
         private ulong id;
         private Random randomize;
         private Users selectedUser;
@@ -142,6 +144,13 @@ namespace BankingProgramWPF
                     }
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
