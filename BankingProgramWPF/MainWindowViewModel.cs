@@ -10,16 +10,27 @@ namespace BankingProgramWPF
 {
     class MainWindowViewModel : Bindable
     {
-        public List<Users> user;
+        public List<Users> User;
         private ulong id;
         private Random randomize;
+        private Users selectedUser;
+
+        public Users SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                selectedUser = value;
+                OnPropertyChanged("SelectedUser");
+            }
+        }
 
         /// <summary>
         /// Старт программы
         /// </summary>
-        public void Start()
+        public MainWindowViewModel()
         {
-            user = new List<Users>();
+            User = new List<Users>();
             randomize = new Random();
             FillingCollectionWithUsers();
         }
@@ -34,8 +45,8 @@ namespace BankingProgramWPF
                 var userPhoneNumber = Convert.ToString(80000000000 + randomize.Next(800000000, 900000000));
                 var userSeriesNumberPassport = Convert.ToString(1000000000 + randomize.Next(100000000, 999999999));
                 var userDateTimeNow = DateTime.Now;
-                user.Add(new ConsultantUsers(NumberId(), $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", true));
-                user.Add(new Manager(NumberId() - 1, $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", false));
+                User.Add(new ConsultantUsers(NumberId(), $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", true));
+                User.Add(new Manager(NumberId() - 1, $"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "SysAdmin", false));
             }
         }
 
@@ -46,11 +57,11 @@ namespace BankingProgramWPF
         public ulong NumberId()
         {
             id = 0;
-            for (int i = 0; i < user.Count; i++)
+            for (int i = 0; i < User.Count; i++)
             {
-                if (user[i].Id > id)
+                if (User[i].Id > id)
                 {
-                    id = user[i].Id;
+                    id = User[i].Id;
                 }
             }
             id++;
@@ -64,12 +75,12 @@ namespace BankingProgramWPF
         {
             for (; ; )
             {
-                for (int i = 0; i < user.Count; i++)
+                for (int i = 0; i < User.Count; i++)
                 {
-                    if (user[i].Id == Convert.ToUInt64(CorrectedUser) && user[i].GetType() == typeof(ConsultantUsers))
+                    if (User[i].Id == Convert.ToUInt64(CorrectedUser) && User[i].GetType() == typeof(ConsultantUsers))
                     {
-                        user[i].СhangedFields = CF;
-                        user[i].ParameterСhange(Convert.ToUInt64(CorrectedUser), user[i].Surname, user[i].Name, user[i].MiddleName, NewPhoneNumber, user[i].SeriesNumberPassport, user);
+                        User[i].СhangedFields = CF;
+                        User[i].ParameterСhange(Convert.ToUInt64(CorrectedUser), User[i].Surname, User[i].Name, User[i].MiddleName, NewPhoneNumber, User[i].SeriesNumberPassport, User);
                     }
                 }
                 break;
@@ -83,18 +94,18 @@ namespace BankingProgramWPF
         {
             for (; ; )
             {
-                for (int i = 0; i < user.Count; i++)
+                for (int i = 0; i < User.Count; i++)
                 {
-                    if (user[i].Id == Convert.ToUInt64(CorrectedUser) && user[i].GetType() == typeof(Manager))
+                    if (User[i].Id == Convert.ToUInt64(CorrectedUser) && User[i].GetType() == typeof(Manager))
                     {
-                        user[i].СhangedFields = CF;
-                        user[i].ParameterСhange(Convert.ToUInt64(CorrectedUser), NewSurname, NewName, NewMiddleName, NewPhoneNumber, NewSeriesNumberPassport, user);
+                        User[i].СhangedFields = CF;
+                        User[i].ParameterСhange(Convert.ToUInt64(CorrectedUser), NewSurname, NewName, NewMiddleName, NewPhoneNumber, NewSeriesNumberPassport, User);
 
-                        for (int j = 0; j < user.Count; j++)
+                        for (int j = 0; j < User.Count; j++)
                         {
-                            if (user[j].Id == Convert.ToUInt64(CorrectedUser) && user[j].GetType() == typeof(ConsultantUsers))
+                            if (User[j].Id == Convert.ToUInt64(CorrectedUser) && User[j].GetType() == typeof(ConsultantUsers))
                             {
-                                user[j].SeriesNumberPassport = $"**********";
+                                User[j].SeriesNumberPassport = $"**********";
                             }
                         }
                     }
@@ -111,11 +122,11 @@ namespace BankingProgramWPF
             using (StreamWriter sw = new StreamWriter("consultant.csv", false, Encoding.Unicode))
             {
                 sw.WriteLine($"ID\tФамилия\tИмя\tОтчество\tНомер телефона\tСерия и номер паспорта\tВремя изменения\tЧто изменено\tТип изменения\tКто изменил");
-                for (int i = 0; i < user.Count; i++)
+                for (int i = 0; i < User.Count; i++)
                 {
-                    if (user[i].GetType() == typeof(ConsultantUsers))
+                    if (User[i].GetType() == typeof(ConsultantUsers))
                     {
-                        sw.WriteLine(user[i].Print());
+                        sw.WriteLine(User[i].Print());
                     }
                 }
             }
@@ -123,11 +134,11 @@ namespace BankingProgramWPF
             using (StreamWriter sw = new StreamWriter("manager.csv", false, Encoding.Unicode))
             {
                 sw.WriteLine($"ID\tФамилия\tИмя\tОтчество\tНомер телефона\tСерия и номер паспорта\tВремя изменения\tЧто изменено\tТип изменения\tКто изменил");
-                for (int i = 0; i < user.Count; i++)
+                for (int i = 0; i < User.Count; i++)
                 {
-                    if (user[i].GetType() == typeof(Manager))
+                    if (User[i].GetType() == typeof(Manager))
                     {
-                        sw.WriteLine(user[i].Print());
+                        sw.WriteLine(User[i].Print());
                     }
                 }
             }

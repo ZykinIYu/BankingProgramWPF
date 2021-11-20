@@ -23,7 +23,8 @@
                   Grid.Column="2" 
                   Margin="10"
                   HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch">
+                  VerticalAlignment="Stretch"
+                  DataContext="{Binding SelectedUser}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
