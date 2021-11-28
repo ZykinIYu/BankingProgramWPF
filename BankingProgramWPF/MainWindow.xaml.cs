@@ -22,12 +22,11 @@ namespace BankingProgramWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
-    }
+        }
 
         /// <summary>
         /// Событие при изменении поля с выпадающим списком
@@ -38,12 +37,12 @@ namespace BankingProgramWPF
         {
             //if (userWPF.Text == "Менеджер")
             //{
-            //    lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
+            //    lvWorkers.ItemsSource = workProcess.User.Where(us => us.GetType() == typeof(Manager));
             //}
 
             //if (userWPF.Text == "Консультант")
             //{
-            //    lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(ConsultantUsers));
+            //    lvWorkers.ItemsSource = workProcess.User.Where(us => us.GetType() == typeof(ConsultantUsers));
             //}
         }
 
@@ -65,11 +64,11 @@ namespace BankingProgramWPF
 
             //if (userWPF.Text == "Консультант")
             //{
-            //    for (int i = 0; i < workProcess.user.Count; i++)
+            //    for (int i = 0; i < workProcess.User.Count; i++)
             //    {
-            //        if (workProcess.user[i].Id == Convert.ToUInt64(userChange[0]) && workProcess.user[i].GetType() == typeof(Manager))
+            //        if (workProcess.User[i].Id == Convert.ToUInt64(userChange[0]) && workProcess.User[i].GetType() == typeof(Manager))
             //        {
-            //            if (workProcess.user[i].Surname != userChange[1])
+            //            if (workProcess.User[i].Surname != userChange[1])
             //            {
             //                if (userChange[1] == "")
             //                {
@@ -79,7 +78,7 @@ namespace BankingProgramWPF
             //                changedFields += "Surname";
             //            }
 
-            //            if (workProcess.user[i].Name != userChange[2])
+            //            if (workProcess.User[i].Name != userChange[2])
             //            {
             //                if (userChange[2] == "")
             //                {
@@ -89,17 +88,17 @@ namespace BankingProgramWPF
             //                changedFields += ", Name";
             //            }
 
-            //            if (workProcess.user[i].MiddleName != userChange[3])
+            //            if (workProcess.User[i].MiddleName != userChange[3])
             //            {
             //                changedFields += ", MiddleName";
             //            }
 
-            //            if (workProcess.user[i].PhoneNumber != userChange[4])
+            //            if (workProcess.User[i].PhoneNumber != userChange[4])
             //            {
             //                changedFields += ", PhoneNumber";
             //            }
 
-            //            if (workProcess.user[i].SeriesNumberPassport != userChange[5])
+            //            if (workProcess.User[i].SeriesNumberPassport != userChange[5])
             //            {
             //                changedFields += ", SeriesNumberPassport";
             //            }
@@ -111,34 +110,34 @@ namespace BankingProgramWPF
 
             //if (userWPF.Text == "Менеджер")
             //{
-            //    for (int i = 0; i < workProcess.user.Count; i++)
+            //    for (int i = 0; i < workProcess.User.Count; i++)
             //    {
-            //        if (workProcess.user[i].Id == Convert.ToUInt64(userChange[0]) && workProcess.user[i].GetType() == typeof(ConsultantUsers))
+            //        if (workProcess.User[i].Id == Convert.ToUInt64(userChange[0]) && workProcess.User[i].GetType() == typeof(ConsultantUsers))
             //        {
-            //            if (workProcess.user[i].Surname != userChange[1])
+            //            if (workProcess.User[i].Surname != userChange[1])
             //            {
             //                MessageBox.Show("Консультанту разрешено вносить изменения только в номер телефона пользователя");
             //                break;
             //            }
 
-            //            if (workProcess.user[i].Name != userChange[2])
+            //            if (workProcess.User[i].Name != userChange[2])
             //            {
             //                MessageBox.Show("Консультанту разрешено вносить изменения только в номер телефона пользователя");
             //                break;
             //            }
 
-            //            if (workProcess.user[i].MiddleName != userChange[3])
+            //            if (workProcess.User[i].MiddleName != userChange[3])
             //            {
             //                MessageBox.Show("Консультанту разрешено вносить изменения только в номер телефона пользователя");
             //                break;
             //            }
 
-            //            if (workProcess.user[i].PhoneNumber != userChange[4])
+            //            if (workProcess.User[i].PhoneNumber != userChange[4])
             //            {
             //                changedFields += ", PhoneNumber";
             //            }
 
-            //            if (workProcess.user[i].SeriesNumberPassport != userChange[5])
+            //            if (workProcess.User[i].SeriesNumberPassport != userChange[5])
             //            {
             //                MessageBox.Show("Консультанту разрешено вносить изменения только в номер телефона пользователя");
             //                break;
@@ -168,8 +167,8 @@ namespace BankingProgramWPF
 
             //if (userWPF.Text == "Консультант")
             //{
-            //    Manager.AddEntry(workProcess.NumberId(), userChange[0], userChange[1], userChange[2], userChange[3], userChange[4], workProcess.user);
-            //    lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
+            //    Manager.AddEntry(workProcess.NumberId(), userChange[0], userChange[1], userChange[2], userChange[3], userChange[4], workProcess.User);
+            //    lvWorkers.ItemsSource = workProcess.User.Where(us => us.GetType() == typeof(Manager));
             //}
 
             //if (userWPF.Text == "Менеджер")
@@ -190,8 +189,8 @@ namespace BankingProgramWPF
 
             //if (userWPF.Text == "Консультант")
             //{
-            //    Manager.RemoveEntry(Convert.ToUInt64(userChange[0]), workProcess.user);
-            //    lvWorkers.ItemsSource = workProcess.user.Where(us => us.GetType() == typeof(Manager));
+            //    Manager.RemoveEntry(Convert.ToUInt64(userChange[0]), workProcess.User);
+            //    lvWorkers.ItemsSource = workProcess.User.Where(us => us.GetType() == typeof(Manager));
             //}
 
             //if (userWPF.Text == "Менеджер")

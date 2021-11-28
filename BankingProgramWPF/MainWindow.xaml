@@ -24,7 +24,7 @@
                   Margin="10"
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
-                  ItemsSource="{Binding Users}"
+                  ItemsSource="{Binding User}"
                   SelectedItem="{Binding SelectedUser}">
             <ListView.View>
                 <GridView>
@@ -49,7 +49,8 @@
             <ComboBox
                 x:Name="userWPF"
                 Margin="10" 
-                SelectionChanged="userWPF_SelectionChanged">
+                SelectionChanged="userWPF_SelectionChanged"
+                SelectedItem="{Binding SelectedUserWPF}">
                 <ComboBoxItem>
                     <TextBlock
                         Text="Консультант"/>

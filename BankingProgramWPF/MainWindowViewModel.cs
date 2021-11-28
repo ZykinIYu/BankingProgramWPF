@@ -27,6 +27,8 @@ namespace BankingProgramWPF
             }
         }
 
+
+
         /// <summary>
         /// Старт программы
         /// </summary>
