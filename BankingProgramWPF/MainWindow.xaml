@@ -24,7 +24,7 @@
                   Margin="10"
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
-                  ItemsSource="{Binding User}"
+                  ItemsSource="{Binding UserIntermediateValue}"
                   SelectedItem="{Binding SelectedUser}">
             <ListView.View>
                 <GridView>
@@ -44,27 +44,19 @@
         <StackPanel 
             HorizontalAlignment="Stretch" 
             Margin="10" 
-            VerticalAlignment="Stretch"
-            DataContext="{Binding SelectedUser}">
+            VerticalAlignment="Stretch">
             <ComboBox
                 x:Name="userWPF"
                 Margin="10" 
-                SelectionChanged="userWPF_SelectionChanged"
+                SelectionChanged="UserWPF_SelectionChanged"
+                ItemsSource="{Binding UserTypes}"
                 SelectedItem="{Binding SelectedUserWPF}">
-                <ComboBoxItem>
-                    <TextBlock
-                        Text="Консультант"/>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock 
-                        Text="Менеджер"/>
-                </ComboBoxItem>
             </ComboBox>
 
             <TextBlock 
                 x:Name="idTB"
                 Margin="10 0 10 10"
-                Text="{Binding Id}"/>
+                Text="{Binding SelectedUser.Id}"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -73,7 +65,8 @@
             <TextBox 
                 x:Name="surnameTB"
                 Margin="10 0 10 10" 
-                Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                IsReadOnly="True"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -82,7 +75,8 @@
             <TextBox 
                 x:Name="nameTB"
                 Margin="10 0 10 10"
-                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                IsReadOnly="True"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -91,7 +85,8 @@
             <TextBox 
                 x:Name="middleNameTB"
                 Margin="10 0 10 10"
-                Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                IsReadOnly="True"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -100,7 +95,8 @@
             <TextBox 
                 x:Name="phoneNumberTB"
                 Margin="10 0 10 10"
-                Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                IsReadOnly="True"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -109,27 +105,34 @@
             <TextBox 
                 x:Name="seriesNumberPassportTB"
                 Margin="10 0 10 10"
-                Text="{Binding SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                IsReadOnly="True"/>
 
             <Button 
                 x:Name="addUser"
                 Content="Добавить"
-                Margin="10 0 10 10" Click="Button_ClickAddUser"/>
+                Margin="10 0 10 10" 
+                Command="{Binding AddCommand}"
+                IsEnabled="False"/>
 
             <Button
                 x:Name="create"
                 Content="Редактировать"
                 Margin="10 0 10 10" 
-                Click="Button_ClickCreate"/>
+                Click="Button_ClickCreate"
+                IsEnabled="False"/>
 
             <Button 
                 x:Name="remove"
                 Content="Удалить"
-                Margin="10 0 10 10" Click="Button_ClickRemove"/>
+                Margin="10 0 10 10" Click="Button_ClickRemove"
+                IsEnabled="False"/>
 
             <Button 
+                x:Name="sortAlphabetically"
                 Content="Сортировать по алфавиту"
-                Margin="10 0 10 10"/>
+                Margin="10 0 10 10"
+                IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Window>

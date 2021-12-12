@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BankingProgram
 {
-    class ConsultantUsers : Users, INotifyPropertyChanged
+    class ConsultantUsers : Users, INotifyPropertyChanged, ICommand
     {
         private ulong id;
 
@@ -23,6 +24,19 @@ namespace BankingProgram
                 id = value;
                 OnPropertyChanged("Id");
             }
+        }
+
+        public static ulong staticId;
+
+        static ConsultantUsers()
+        {
+            staticId = 0;
+        }
+
+        public static ulong NextId()
+        {
+            staticId++;
+            return staticId;
         }
 
         private string surname;
@@ -134,9 +148,10 @@ namespace BankingProgram
         /// <param name="MiddleName">Отчество</param>
         /// <param name="PhoneNumber">Номер телефона</param>
         /// <param name="SeriesNumberPassport">серия и номер паспорта</param>
-        public ConsultantUsers(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
+        public ConsultantUsers(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
         {
-            this.Id = Id;
+            this.Id = NextId();
+            staticId--;
             this.Surname = Surname;
             this.Name = Name;
             this.MiddleName = MiddleName;
@@ -200,9 +215,10 @@ namespace BankingProgram
         /// <summary>
         /// Добавление новой записи
         /// </summary>
-        public virtual void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public virtual void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
-            MessageBox.Show("Консультанту запрещено добавлять пользователей");
+            var data = DateTime.Now;
+            user.Add(new ConsultantUsers(Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
         }
 
         /// <summary>
@@ -214,11 +230,21 @@ namespace BankingProgram
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler CanExecuteChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Execute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

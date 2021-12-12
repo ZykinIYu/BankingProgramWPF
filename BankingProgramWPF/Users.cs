@@ -84,10 +84,10 @@ namespace BankingProgram
         /// <param name="userM">Коллекция пользователей для менеджера</param>
         void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user);
 
-        /// <summary>
-        /// Добавление новой записи
-        /// </summary>
-        void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user);
+        ///// <summary>
+        ///// Добавление новой записи
+        ///// </summary>
+        //void AddEntry(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user);
 
         /// <summary>
         /// Удаление записи записи

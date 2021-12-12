@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BankingProgram
 {
-    class Manager : ConsultantUsers, INotifyPropertyChanged
+    class Manager : ConsultantUsers/*, INotifyPropertyChanged, ICommand*/
     {
+
         /// <summary>
         /// Конструктор для создания пользователей
         /// </summary>
@@ -22,11 +24,13 @@ namespace BankingProgram
         /// <param name="WhatDataChanged"></param>
         /// <param name="TypeChange"></param>
         /// <param name="WhoChangedData"></param>
-        public Manager(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
-            : base (Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, DateTimeEntryModified, WhatDataChanged, TypeChange, WhoChangedData, СonsultantСheck)
+        public Manager(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, DateTime DateTimeEntryModified, string WhatDataChanged, string TypeChange, string WhoChangedData, bool СonsultantСheck)
+            : base (Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, DateTimeEntryModified, WhatDataChanged, TypeChange, WhoChangedData, СonsultantСheck)
         {
-            
+            this.Id = NextId();
         }
+
+        //public event EventHandler CanExecuteChanged;
 
         /// <summary>
         /// Метод печати элементов
@@ -70,11 +74,11 @@ namespace BankingProgram
         /// <param name="PhoneNumber">Номер телефона</param>
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей</param>
-        public new static void AddEntry(ulong Id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public new static void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
         {
             var data = DateTime.Now;
-            user.Add(new Manager(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", false));
-            user.Add(new ConsultantUsers(Id, Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
+            user.Add(new Manager(Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", false));
+            //user.Add(new ConsultantUsers(Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
         }
 
         /// <summary>
@@ -85,5 +89,14 @@ namespace BankingProgram
             user.RemoveAll(us => us.Id == id);
         }
 
+        //public bool CanExecute(object parameter)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Execute(object parameter)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
