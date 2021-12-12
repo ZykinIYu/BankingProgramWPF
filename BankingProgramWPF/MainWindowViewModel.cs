@@ -212,7 +212,7 @@ namespace BankingProgramWPF
         ////Привязка добавления нового пользователя
         //public ICommand AddUser { protected set; get; }
 
-        // команда добавления нового объекта
+        // команда добавления нового объекта 
         private RelayCommand addUser;
         public RelayCommand AddUser
         {
