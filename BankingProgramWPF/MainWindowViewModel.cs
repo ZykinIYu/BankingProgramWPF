@@ -218,7 +218,8 @@ namespace BankingProgramWPF
                           User.Add(m);
                           SelectedUser = cu;
                           SelectedUser = m;
-                      }                      
+                      }
+                      UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
                   }));
             }
         }
@@ -274,6 +275,7 @@ namespace BankingProgramWPF
                                       ChangingParametersManager(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[1], MainWindow.staticArrayUserProperties[2], MainWindow.staticArrayUserProperties[3], MainWindow.staticArrayUserProperties[4], MainWindow.staticArrayUserProperties[5], MainWindow.changedFields);
                                   }
                               }
+                              UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
                           }
 
                           if (selectedUserWPF == "Консультант")
@@ -289,6 +291,7 @@ namespace BankingProgramWPF
                                       ChangingParametersConsultant(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[4], MainWindow.changedFields);
                                   }
                               }
+                              UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
                           }
                       }
                   }));
@@ -313,6 +316,7 @@ namespace BankingProgramWPF
                         {
                             Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]), user);
                         }
+                        UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
                     }));
             }
         }
