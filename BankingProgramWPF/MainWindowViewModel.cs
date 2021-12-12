@@ -6,9 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace BankingProgramWPF
 {
@@ -191,7 +189,6 @@ namespace BankingProgramWPF
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        //public event EventHandler CanExecuteChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -199,20 +196,7 @@ namespace BankingProgramWPF
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        //public bool CanExecute(object parameter)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Execute(object parameter)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        ////Привязка добавления нового пользователя
-        //public ICommand AddUser { protected set; get; }
-
-        // команда добавления нового объекта 
+        // команда добавления нового пользователя 
         private RelayCommand addUser;
         public RelayCommand AddUser
         {
@@ -236,6 +220,100 @@ namespace BankingProgramWPF
                           SelectedUser = m;
                       }                      
                   }));
+            }
+        }
+
+        // команда редактирования пользователя 
+        private RelayCommand editUser;
+        public RelayCommand EditUser
+        {
+            get
+            {
+                return editUser ??
+                  (editUser = new RelayCommand(obj =>
+                  {
+                      var date = DateTime.Now;
+                      MainWindow.changedFields = "Изменено: ";
+                      if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[1]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]))
+                      {
+                          MessageBox.Show($"Необходимо выбрать пользователя и заполнить обязательные поля: Фамилия, Имя, отчество");
+                      }
+                      else
+                      {
+                          if (selectedUserWPF == "Менеджер")
+                          {
+                              for (int i = 0; i < user.Count; i++)
+                              {
+                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]) && user[i].GetType() == typeof(Manager))
+                                  {
+                                      if (user[i].Surname != MainWindow.staticArrayUserProperties[1])
+                                      {
+                                          MainWindow.changedFields += "Surname";
+                                      }
+
+                                      if (user[i].Name != MainWindow.staticArrayUserProperties[2])
+                                      {
+                                          MainWindow.changedFields += ", Name";
+                                      }
+
+                                      if (user[i].MiddleName != MainWindow.staticArrayUserProperties[3])
+                                      {
+                                          MainWindow.changedFields += ", MiddleName";
+                                      }
+
+                                      if (user[i].PhoneNumber != MainWindow.staticArrayUserProperties[4])
+                                      {
+                                          MainWindow.changedFields += ", PhoneNumber";
+                                      }
+
+                                      if (user[i].SeriesNumberPassport != MainWindow.staticArrayUserProperties[5])
+                                      {
+                                          MainWindow.changedFields += ", SeriesNumberPassport";
+                                      }
+
+                                      ChangingParametersManager(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[1], MainWindow.staticArrayUserProperties[2], MainWindow.staticArrayUserProperties[3], MainWindow.staticArrayUserProperties[4], MainWindow.staticArrayUserProperties[5], MainWindow.changedFields);
+                                  }
+                              }
+                          }
+
+                          if (selectedUserWPF == "Консультант")
+                          {
+                              for (int i = 0; i < user.Count; i++)
+                              {
+                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]) && user[i].GetType() == typeof(ConsultantUsers))
+                                  {
+                                      if (user[i].PhoneNumber != MainWindow.staticArrayUserProperties[4])
+                                      {
+                                          MainWindow.changedFields += "PhoneNumber";
+                                      }
+                                      ChangingParametersConsultant(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[4], MainWindow.changedFields);
+                                  }
+                              }
+                          }
+                      }
+                  }));
+            }
+        }
+
+        // команда удаления пользователя
+        private RelayCommand deleteUser;
+
+        public RelayCommand DeleteUser
+        {
+            get
+            { 
+                return deleteUser ??
+                    (deleteUser = new RelayCommand(obj =>
+                    {
+                        if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[0]))
+                        {
+                            MessageBox.Show($"Необходимо выбрать пользователя для удаления");
+                        }
+                        else
+                        {
+                            Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]), user);
+                        }
+                    }));
             }
         }
     }

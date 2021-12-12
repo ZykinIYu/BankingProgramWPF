@@ -53,10 +53,12 @@
                 SelectedItem="{Binding SelectedUserWPF}">
             </ComboBox>
 
-            <TextBlock 
+            <TextBox 
                 x:Name="idTB"
                 Margin="10 0 10 10"
-                Text="{Binding SelectedUser.Id}" TextInput="idTB_TextInput"/>
+                IsReadOnly="True"
+                Text="{Binding SelectedUser.Id}" 
+                TextChanged="idTB_TextChanged"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -119,13 +121,15 @@
             <Button
                 x:Name="create"
                 Content="Редактировать"
-                Margin="10 0 10 10" 
+                Margin="10 0 10 10"
+                Command="{Binding EditUser}"
                 IsEnabled="False"/>
 
             <Button 
                 x:Name="remove"
                 Content="Удалить"
                 Margin="10 0 10 10"
+                Command="{Binding DeleteUser}"
                 IsEnabled="False"/>
 
             <Button 

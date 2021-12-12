@@ -12,6 +12,7 @@ namespace BankingProgramWPF
     public partial class MainWindow : Window
     {
         public static string[] staticArrayUserProperties;
+        public static string changedFields;
 
         public MainWindow()
         {
@@ -55,7 +56,7 @@ namespace BankingProgramWPF
             }
         }
 
-        private void idTB_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void idTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             staticArrayUserProperties[0] = idTB.Text;
         }
@@ -84,7 +85,5 @@ namespace BankingProgramWPF
         {
             staticArrayUserProperties[5] = seriesNumberPassportTB.Text;
         }
-
-        
     }
 }
