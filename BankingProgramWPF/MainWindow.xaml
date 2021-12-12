@@ -56,7 +56,7 @@
             <TextBlock 
                 x:Name="idTB"
                 Margin="10 0 10 10"
-                Text="{Binding SelectedUser.Id}"/>
+                Text="{Binding SelectedUser.Id}" TextInput="idTB_TextInput"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -66,7 +66,8 @@
                 x:Name="surnameTB"
                 Margin="10 0 10 10" 
                 Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True"/>
+                IsReadOnly="True" 
+                TextChanged="surnameTB_TextChanged"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -76,7 +77,7 @@
                 x:Name="nameTB"
                 Margin="10 0 10 10"
                 Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True"/>
+                IsReadOnly="True" TextChanged="nameTB_TextChanged"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -86,7 +87,7 @@
                 x:Name="middleNameTB"
                 Margin="10 0 10 10"
                 Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True"/>
+                IsReadOnly="True" TextChanged="middleNameTB_TextChanged"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -96,7 +97,7 @@
                 x:Name="phoneNumberTB"
                 Margin="10 0 10 10"
                 Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True"/>
+                IsReadOnly="True" TextChanged="phoneNumberTB_TextChanged"/>
 
             <TextBlock 
                 Margin="10 0 10 10"
@@ -106,26 +107,25 @@
                 x:Name="seriesNumberPassportTB"
                 Margin="10 0 10 10"
                 Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True"/>
+                IsReadOnly="True" TextChanged="seriesNumberPassportTB_TextChanged"/>
 
             <Button 
                 x:Name="addUser"
                 Content="Добавить"
                 Margin="10 0 10 10" 
-                Command="{Binding AddCommand}"
+                Command="{Binding AddUser}"
                 IsEnabled="False"/>
 
             <Button
                 x:Name="create"
                 Content="Редактировать"
                 Margin="10 0 10 10" 
-                Click="Button_ClickCreate"
                 IsEnabled="False"/>
 
             <Button 
                 x:Name="remove"
                 Content="Удалить"
-                Margin="10 0 10 10" Click="Button_ClickRemove"
+                Margin="10 0 10 10"
                 IsEnabled="False"/>
 
             <Button 

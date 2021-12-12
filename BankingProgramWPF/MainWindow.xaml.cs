@@ -11,9 +11,12 @@ namespace BankingProgramWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string[] staticArrayUserProperties;
+
         public MainWindow()
         {
             InitializeComponent();
+            staticArrayUserProperties = new string[6];
             DataContext = new MainWindowViewModel();
         }
 
@@ -52,91 +55,36 @@ namespace BankingProgramWPF
             }
         }
 
-        /// <summary>
-        /// Клик для изменения данных пользователя
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_ClickCreate(object sender, RoutedEventArgs e)
+        private void idTB_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            //string[] userChange = new string[6];
-            //userChange[0] = idTB.Text;
-            //userChange[1] = surnameTB.Text;
-            //userChange[2] = nameTB.Text;
-            //userChange[3] = middleNameTB.Text;
-            //userChange[4] = phoneNumberTB.Text;
-            //userChange[5] = seriesNumberPassportTB.Text;
-            //string changedFields = "Изменено: ";
+            staticArrayUserProperties[0] = idTB.Text;
+        }
 
-            //for (int i = 0; i < User.Count; i++)
-            //{
-            //    if (User[i].Id == Convert.ToUInt64(userChange[0]) && workProcess.User[i].GetType() == typeof(Manager))
-            //    {
-            //        if (workProcess.User[i].Surname != userChange[1])
-            //        {
-            //            if (userChange[1] == "")
-            //            {
-            //                MessageBox.Show("Поле \"Фамилия\" является обязательным для заполнения");
-            //                break;
-            //            }
-            //            changedFields += "Surname";
-            //        }
+        private void surnameTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticArrayUserProperties[1] = surnameTB.Text;
+        }
 
-            //        if (workProcess.User[i].Name != userChange[2])
-            //        {
-            //            if (userChange[2] == "")
-            //            {
-            //                MessageBox.Show("Поле \"Имя\" является обязательным для заполнения");
-            //                break;
-            //            }
-            //            changedFields += ", Name";
-            //        }
+        private void nameTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticArrayUserProperties[2] = nameTB.Text;
+        }
 
-            //        if (workProcess.User[i].MiddleName != userChange[3])
-            //        {
-            //            changedFields += ", MiddleName";
-            //        }
+        private void middleNameTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticArrayUserProperties[3] = middleNameTB.Text;
+        }
 
-            //        if (workProcess.User[i].PhoneNumber != userChange[4])
-            //        {
-            //            changedFields += ", PhoneNumber";
-            //        }
+        private void phoneNumberTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticArrayUserProperties[4] = phoneNumberTB.Text;
+        }
 
-            //        if (workProcess.User[i].SeriesNumberPassport != userChange[5])
-            //        {
-            //            changedFields += ", SeriesNumberPassport";
-            //        }
-
-            //        workProcess.ChangingParametersManager(userChange[0], userChange[1], userChange[2], userChange[3], userChange[4], userChange[5], changedFields);
-            //    }
-            //}
-
-            //lvWorkers.Items.Refresh();
+        private void seriesNumberPassportTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticArrayUserProperties[5] = seriesNumberPassportTB.Text;
         }
 
         
-
-        /// <summary>
-        /// Клик для удаления пользователя
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_ClickRemove(object sender, RoutedEventArgs e)
-        {
-            //string[] userChange = new string[1];
-            //userChange[0] = idTB.Text;
-
-            //if (userWPF.Text == "Консультант")
-            //{
-            //    Manager.RemoveEntry(Convert.ToUInt64(userChange[0]), workProcess.User);
-            //    lvWorkers.ItemsSource = workProcess.User.Where(us => us.GetType() == typeof(Manager));
-            //}
-
-            //if (userWPF.Text == "Менеджер")
-            //{
-            //    MessageBox.Show("Консультанту запрещено удалять пользователей");
-            //}
-
-        }
     }
 }

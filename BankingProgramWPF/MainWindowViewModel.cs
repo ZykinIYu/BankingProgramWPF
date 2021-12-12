@@ -213,21 +213,28 @@ namespace BankingProgramWPF
         //public ICommand AddUser { protected set; get; }
 
         // команда добавления нового объекта
-        private RelayCommand addCommand;
-        public RelayCommand AddCommand
+        private RelayCommand addUser;
+        public RelayCommand AddUser
         {
             get
             {
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
+                return addUser ??
+                  (addUser = new RelayCommand(obj =>
                   {
                       var date = DateTime.Now;
-                      ConsultantUsers cu = new ConsultantUsers($"test", $"test", $"test", $"111", $"111", date, "-", "Добавлена новая запись", "Менеджер", true);
-                      Manager m = new Manager($"test", $"test", $"test", $"111", $"111", date, "-", "Добавлена новая запись", "Менеджер", false);
-                      User.Add(cu);
-                      User.Add(m);
-                      SelectedUser = cu;
-                      SelectedUser = m;
+                      if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[1]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]))
+                      {
+                          MessageBox.Show("Необходимо заполнить обязательные поля: Фамилия, Имя, отчество");
+                      }
+                      else
+                      {
+                          ConsultantUsers cu = new ConsultantUsers($"{MainWindow.staticArrayUserProperties[1]}", $"{MainWindow.staticArrayUserProperties[2]}", $"{MainWindow.staticArrayUserProperties[3]}", $"{MainWindow.staticArrayUserProperties[4]}", $"{MainWindow.staticArrayUserProperties[5]}", date, "-", "Добавлена новая запись", "Менеджер", true);
+                          Manager m = new Manager($"{MainWindow.staticArrayUserProperties[1]}", $"{MainWindow.staticArrayUserProperties[2]}", $"{MainWindow.staticArrayUserProperties[3]}", $"{MainWindow.staticArrayUserProperties[4]}", $"{MainWindow.staticArrayUserProperties[5]}", date, "-", "Добавлена новая запись", "Менеджер", false);
+                          User.Add(cu);
+                          User.Add(m);
+                          SelectedUser = cu;
+                          SelectedUser = m;
+                      }                      
                   }));
             }
         }
