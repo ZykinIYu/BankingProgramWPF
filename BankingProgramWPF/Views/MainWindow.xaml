@@ -136,7 +136,8 @@
                 x:Name="sortAlphabetically"
                 Content="Сортировать по алфавиту"
                 Margin="10 0 10 10"
-                IsEnabled="False"/>
+                IsEnabled="False"
+                Command="{Binding SortSurnameUser}"/>
         </StackPanel>
     </Grid>
 </Window>

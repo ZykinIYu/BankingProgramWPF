@@ -9,7 +9,7 @@ namespace BankingProgram
     /// <summary>
     /// Описание пользователей
     /// </summary>
-    interface Users
+    interface IUsers
     {
         /// <summary>
         /// Свойство чтения и записи идентификатора
@@ -82,7 +82,7 @@ namespace BankingProgram
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей для консультанта</param>
         /// <param name="userM">Коллекция пользователей для менеджера</param>
-        void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user);
+        void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<IUsers> user);
 
         ///// <summary>
         ///// Добавление новой записи
@@ -92,7 +92,7 @@ namespace BankingProgram
         /// <summary>
         /// Удаление записи записи
         /// </summary>
-        void RemoveEntry(ulong id, List<Users> user);
+        void RemoveEntry(ulong id, List<IUsers> user);
 
     }
 }

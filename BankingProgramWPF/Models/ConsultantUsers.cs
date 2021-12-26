@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace BankingProgram
 {
-    class ConsultantUsers : Users, INotifyPropertyChanged, ICommand
+    class ConsultantUsers : IUsers, IComparable
     {
         private ulong id;
 
@@ -203,7 +203,7 @@ namespace BankingProgram
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей для консультанта</param>
         /// <param name="userM">Коллекция пользователей для менеджера</param>
-        public virtual void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public virtual void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<IUsers> user)
         {
             user.FindAll(us => us.Id == Convert.ToUInt64(id)).ForEach(us => us.PhoneNumber = PhoneNumber);
             user.FindAll(us => us.Id == Convert.ToUInt64(id)).ForEach(us => us.DateTimeEntryModified = DateTime.Now);
@@ -215,7 +215,7 @@ namespace BankingProgram
         /// <summary>
         /// Добавление новой записи
         /// </summary>
-        public virtual void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public virtual void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<IUsers> user)
         {
             var data = DateTime.Now;
             user.Add(new ConsultantUsers(Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", true));
@@ -224,13 +224,12 @@ namespace BankingProgram
         /// <summary>
         /// Удаление записи
         /// </summary>
-        public virtual void RemoveEntry(ulong id, List<Users> user)
+        public virtual void RemoveEntry(ulong id, List<IUsers> user)
         {
             MessageBox.Show("Консультанту запрещено удалять пользователей пользователей");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler CanExecuteChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -245,6 +244,20 @@ namespace BankingProgram
         public void Execute(object parameter)
         {
             throw new NotImplementedException();
+        }
+
+        //public int CompareTo(object obj)
+        //{
+        //    return surname.CompareTo(obj);
+        //}
+
+        public int CompareTo(object o)
+        {
+            ConsultantUsers cu = o as ConsultantUsers;
+            if (cu != null)
+                return this.Surname.CompareTo(cu.Surname);
+            else
+                throw new Exception("Невозможно сравнить два объекта");
         }
     }
 }

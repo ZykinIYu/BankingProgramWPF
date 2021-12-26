@@ -1,4 +1,5 @@
 ﻿using BankingProgram;
+using BankingProgramWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,11 +11,11 @@ using System.Windows;
 
 namespace BankingProgramWPF
 {
-    class MainWindowViewModel : INotifyPropertyChanged/*, ICommand*/
+    class MainWindowViewModel : Bindable
     {
         //Список пользователей
-        private List<Users> user;
-        public List<Users> User 
+        private List<IUsers> user;
+        public List<IUsers> User 
         {
             get 
             {
@@ -28,8 +29,8 @@ namespace BankingProgramWPF
         }
 
         //Промежуточный список пользователей
-        private List<Users> userIntermediateValue;
-        public List<Users> UserIntermediateValue
+        private List<IUsers> userIntermediateValue;
+        public List<IUsers> UserIntermediateValue
         {
             get
             {
@@ -74,8 +75,8 @@ namespace BankingProgramWPF
         private Random randomize;
 
         //связка для просмотра параметров пользователя
-        private Users selectedUser;
-        public Users SelectedUser
+        private IUsers selectedUser;
+        public IUsers SelectedUser
         {
             get { return selectedUser; }
             set
@@ -92,7 +93,7 @@ namespace BankingProgramWPF
         /// </summary>
         public MainWindowViewModel()
         {
-            User = new List<Users>();
+            User = new List<IUsers>();
             randomize = new Random();
             FillingCollectionWithUsers();
         }
@@ -156,44 +157,6 @@ namespace BankingProgramWPF
                 }
                 break;
             }
-        }
-
-        /// <summary>
-        /// Печать списка пользователей в документы
-        /// </summary>
-        private void PrintDocument()
-        {
-            using (StreamWriter sw = new StreamWriter("consultant.csv", false, Encoding.Unicode))
-            {
-                sw.WriteLine($"ID\tФамилия\tИмя\tОтчество\tНомер телефона\tСерия и номер паспорта\tВремя изменения\tЧто изменено\tТип изменения\tКто изменил");
-                for (int i = 0; i < User.Count; i++)
-                {
-                    if (User[i].GetType() == typeof(ConsultantUsers))
-                    {
-                        sw.WriteLine(User[i].Print());
-                    }
-                }
-            }
-
-            using (StreamWriter sw = new StreamWriter("manager.csv", false, Encoding.Unicode))
-            {
-                sw.WriteLine($"ID\tФамилия\tИмя\tОтчество\tНомер телефона\tСерия и номер паспорта\tВремя изменения\tЧто изменено\tТип изменения\tКто изменил");
-                for (int i = 0; i < User.Count; i++)
-                {
-                    if (User[i].GetType() == typeof(Manager))
-                    {
-                        sw.WriteLine(User[i].Print());
-                    }
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         // команда добавления нового пользователя 
@@ -316,6 +279,22 @@ namespace BankingProgramWPF
                         {
                             Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]), user);
                         }
+                        UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                    }));
+            }
+        }
+
+        // команда сортировки по фамилии пользователя
+        private RelayCommand sortSurnameUser;
+
+        public RelayCommand SortSurnameUser
+        {
+            get
+            {
+                return sortSurnameUser ??
+                    (sortSurnameUser = new RelayCommand(obj =>
+                    {
+                        user.Sort();
                         UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
                     }));
             }

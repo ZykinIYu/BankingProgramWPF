@@ -39,7 +39,7 @@ namespace BankingProgramWPF
                 addUser.IsEnabled = false;
                 create.IsEnabled = true;
                 remove.IsEnabled = false;
-                sortAlphabetically.IsEnabled = false;
+                sortAlphabetically.IsEnabled = true;
             }
 
             if (Convert.ToString(userWPF.SelectedValue) == "Менеджер")

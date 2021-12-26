@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace BankingProgram
 {
-    class Manager : ConsultantUsers/*, INotifyPropertyChanged, ICommand*/
+    class Manager : ConsultantUsers
     {
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BankingProgram
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей для консультанта</param>
         /// <param name="userM">Коллекция пользователей для менеджера</param>
-        public override void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public override void ParameterСhange(ulong id, string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<IUsers> user)
         {
             user.FindAll(us => us.Id == Convert.ToUInt64(id)).ForEach(us => us.Surname = Surname);
             user.FindAll(us => us.Id == Convert.ToUInt64(id)).ForEach(us => us.Name = Name);
@@ -75,7 +75,7 @@ namespace BankingProgram
         /// <param name="PhoneNumber">Номер телефона</param>
         /// <param name="SeriesNumberPassport">Серия и номер паспорта</param>
         /// <param name="user">Коллекция пользователей</param>
-        public new static void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<Users> user)
+        public new static void AddEntry(string Surname, string Name, string MiddleName, string PhoneNumber, string SeriesNumberPassport, List<IUsers> user)
         {
             var data = DateTime.Now;
             user.Add(new Manager(Surname, Name, MiddleName, PhoneNumber, SeriesNumberPassport, data, "-", "Добавлена новая запись", "Менеджер", false));
@@ -85,19 +85,10 @@ namespace BankingProgram
         /// <summary>
         /// Удаление записи
         /// </summary>
-        public new static void RemoveEntry(ulong id, List<Users> user)
+        public new static void RemoveEntry(ulong id, List<IUsers> user)
         {
             user.RemoveAll(us => us.Id == id);
         }
 
-        //public bool CanExecute(object parameter)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void Execute(object parameter)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
