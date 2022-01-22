@@ -33,6 +33,25 @@ namespace BankingProgramWPF.Models
         }
 
         /// <summary>
+        /// Статическое поле для записи id
+        /// </summary>
+        public static ulong stIdAccounts;
+
+        /// <summary>
+        /// Статический конструктор
+        /// </summary>
+        static Accounts()
+        {
+            stIdAccounts = 0;
+        }
+
+        public ulong NextStId()
+        {
+            stIdAccounts++;
+            return stIdAccounts;
+        }
+
+        /// <summary>
         /// id пользователя
         /// </summary>
         private T1 idUser;
@@ -66,6 +85,13 @@ namespace BankingProgramWPF.Models
                 accountType = value;
                 OnPropertyChanged("AccountType");
             }
+        }
+
+        public Accounts(T1 idUser, T2 accountType)
+        {
+            this.IdAccounts = NextStId();
+            this.IdUser = idUser;
+            this.AccountType = accountType;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

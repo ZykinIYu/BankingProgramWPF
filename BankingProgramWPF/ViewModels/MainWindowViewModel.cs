@@ -15,6 +15,8 @@ namespace BankingProgramWPF
     {
         //Список пользователей
         private List<IUsers> user;
+
+        //Параметр списка пользователей
         public List<IUsers> User 
         {
             get 
@@ -295,6 +297,7 @@ namespace BankingProgramWPF
         // команда удаления пользователя
         private RelayCommand deleteUser;
 
+        //параметр команды удаления пользователей
         public RelayCommand DeleteUser
         {
             get
@@ -316,9 +319,10 @@ namespace BankingProgramWPF
             }
         }
 
-        // команда сортировки по фамилии пользователя
+        //команда сортировки по фамилии пользователя
         private RelayCommand sortSurnameUser;
 
+        //параметр команды сортировки
         public RelayCommand SortSurnameUser
         {
             get
@@ -331,5 +335,7 @@ namespace BankingProgramWPF
                     }));
             }
         }
+
+
     }
 }
