@@ -139,6 +139,21 @@ namespace BankingProgram
         /// </summary>
         public string СhangedFields { get; set; }
 
+        private string nameString;
+
+        /// <summary>
+        /// Свойство для чтения отображаемого имени пользователя
+        /// </summary>
+        public string NameString
+        {
+            get { return nameString; }
+            set
+            {
+                nameString = value;
+                OnPropertyChanged("NameString");
+            }
+        }
+
         /// <summary>
         /// Конструктор пользователей
         /// </summary>
@@ -161,6 +176,7 @@ namespace BankingProgram
             this.WhatDataChanged = WhatDataChanged;
             this.TypeChange = TypeChange;
             this.WhoChangedData = WhoChangedData;
+            this.NameString = Id + " " + Surname + " " + Name + " " + MiddleName;
 
             if (СonsultantСheck == true)
             {

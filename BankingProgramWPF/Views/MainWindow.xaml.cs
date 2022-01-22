@@ -26,10 +26,10 @@ namespace BankingProgramWPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UserWPF_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UserWPFTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (Convert.ToString(userWPF.SelectedValue) == "Консультант")
+            if (Convert.ToString(userWPFTypes.SelectedValue) == "Консультант")
             {
                 surnameTB.IsReadOnly = true;
                 nameTB.IsReadOnly = true;
@@ -42,7 +42,7 @@ namespace BankingProgramWPF
                 sortAlphabetically.IsEnabled = true;
             }
 
-            if (Convert.ToString(userWPF.SelectedValue) == "Менеджер")
+            if (Convert.ToString(userWPFTypes.SelectedValue) == "Менеджер")
             {
                 surnameTB.IsReadOnly = false;
                 nameTB.IsReadOnly = false;

@@ -46,6 +46,32 @@ namespace BankingProgramWPF
         //Для кого предназначены пользователи, тип пользователя
         public List<string> UserTypes { get; set; } = new List<string> { "Консультант", "Менеджер" };
 
+        //Список клиентов
+        private List<IUsers> userList;
+
+        //Свойство списка клиентов
+        public List<IUsers> UserList
+        {
+            get
+            {
+                return userList.Where(ul => ul.GetType() == typeof(Manager)).ToList();
+            }
+            set
+            {
+                userList = value;
+                OnPropertyChanged("UserList");
+            }
+        }
+
+
+        //public void UserListАilling()
+        //{
+        //    for (int i = 0; i < User.Count; i++)
+        //    {
+        //        UserList.Add(Convert.ToString(User[i].Id) + User[i].Surname + User[i].Name + User[i].MiddleName);
+        //    }
+        //}
+
         //Свойство для заполнения списка пользователей
         private string selectedUserWPF;
         public string SelectedUserWPF
@@ -94,8 +120,10 @@ namespace BankingProgramWPF
         public MainWindowViewModel()
         {
             User = new List<IUsers>();
+            UserList = new List<IUsers>();
             randomize = new Random();
             FillingCollectionWithUsers();
+            UserList = User;
         }
 
         /// <summary>
@@ -183,6 +211,7 @@ namespace BankingProgramWPF
                           SelectedUser = m;
                       }
                       UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                      UserList = User;
                   }));
             }
         }
@@ -239,6 +268,7 @@ namespace BankingProgramWPF
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                              UserList = User;
                           }
 
                           if (selectedUserWPF == "Консультант")
@@ -255,6 +285,7 @@ namespace BankingProgramWPF
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
+                              UserList = User;
                           }
                       }
                   }));
@@ -280,6 +311,7 @@ namespace BankingProgramWPF
                             Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]), user);
                         }
                         UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                        UserList = User;
                     }));
             }
         }
