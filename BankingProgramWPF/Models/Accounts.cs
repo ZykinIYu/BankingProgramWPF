@@ -12,7 +12,7 @@ namespace BankingProgramWPF.Models
     /// <summary>
     /// Модель описывающая банковские счета
     /// </summary>
-    class Accounts<T1, T2> : IComparable
+    class Accounts<T1, T2, T3> : IComparable
     {
         /// <summary>
         /// Иденификатор счета
@@ -20,7 +20,7 @@ namespace BankingProgramWPF.Models
         private ulong idAccounts;
 
         /// <summary>
-        /// Параметр id счета
+        /// Свойство id счета
         /// </summary>
         public ulong IdAccounts
         {
@@ -57,7 +57,7 @@ namespace BankingProgramWPF.Models
         private T1 idUser;
 
         /// <summary>
-        /// Параметр id пользователя
+        /// Свойство id пользователя
         /// </summary>
         public T1 IdUser
         {
@@ -75,7 +75,7 @@ namespace BankingProgramWPF.Models
         private T2 accountType;
 
         /// <summary>
-        /// Параметр типа счета
+        /// Свойство типа счета
         /// </summary>
         public T2 AccountType
         {
@@ -87,11 +87,30 @@ namespace BankingProgramWPF.Models
             }
         }
 
-        public Accounts(T1 idUser, T2 accountType)
+        /// <summary>
+        /// Денежный баланс на счете
+        /// </summary>
+        private T3 moneyBalance;
+
+
+        public T3 MoneyBalance
+        {
+            get { return moneyBalance; }
+            set
+            {
+                moneyBalance = value;
+                OnPropertyChanged("MoneyBalance");
+            }
+        }
+
+
+
+        public Accounts(T1 idUser, T2 accountType, T3 moneyBalance)
         {
             this.IdAccounts = NextStId();
             this.IdUser = idUser;
             this.AccountType = accountType;
+            this.MoneyBalance = moneyBalance;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,4 +1,5 @@
 ﻿using BankingProgram;
+using BankingProgramWPF.Models;
 using BankingProgramWPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,14 @@ namespace BankingProgramWPF
 {
     class MainWindowViewModel : Bindable
     {
-        //Список пользователей
+        /// <summary>
+        /// Список пользователей
+        /// </summary>
         private List<IUsers> user;
 
-        //Параметр списка пользователей
+        /// <summary>
+        /// Свойство списка пользователей
+        /// </summary>
         public List<IUsers> User 
         {
             get 
@@ -27,6 +32,42 @@ namespace BankingProgramWPF
             {
                 user = value;
                 OnPropertyChanged("User");
+            }
+        }
+
+        /// <summary>
+        /// Список пользователей
+        /// </summary>
+        private List<Accounts<ulong, string, ulong>> accounts;
+
+        /// <summary>
+        /// Свойство списка пользователей
+        /// </summary>
+        public List<Accounts<ulong, string, ulong>> Accounts
+        {
+            get { return accounts; }
+            set
+            {
+                accounts = value;
+                OnPropertyChanged("Accounts");
+            }
+        }
+
+        /// <summary>
+        /// Список пользователей промежуточный
+        /// </summary>
+        private List<Accounts<ulong, string, ulong>> accountsIntermediateValue;
+
+        /// <summary>
+        /// Свойство списка пользователей промежуточного
+        /// </summary>
+        public List<Accounts<ulong, string, ulong>> AccountsIntermediateValue
+        {
+            get { return accountsIntermediateValue; }
+            set
+            {
+                accountsIntermediateValue = value;
+                OnPropertyChanged("AccountsIntermediateValue");
             }
         }
 
@@ -65,15 +106,6 @@ namespace BankingProgramWPF
             }
         }
 
-
-        //public void UserListАilling()
-        //{
-        //    for (int i = 0; i < User.Count; i++)
-        //    {
-        //        UserList.Add(Convert.ToString(User[i].Id) + User[i].Surname + User[i].Name + User[i].MiddleName);
-        //    }
-        //}
-
         //Свойство для заполнения списка пользователей
         private string selectedUserWPF;
         public string SelectedUserWPF
@@ -99,6 +131,28 @@ namespace BankingProgramWPF
             }
         }
 
+        /// <summary>
+        /// заплнение списка счетов в WPF
+        /// </summary>
+        private string selectedAccountsWPF;
+
+        /// <summary>
+        /// свойство заплнения списка счетов в WPF
+        /// </summary>
+        public string SelectedAccountsWPF
+        {
+            get { return selectedAccountsWPF; }
+            set
+            {
+                accountsIntermediateValue = accounts;
+            }
+        }
+
+        /// <summary>
+        /// Тип счета
+        /// </summary>
+        public List<string> AccountsTypes { get; set; } = new List<string> { "Недепозитный", "Депозитный" };
+
         private ulong id;
         private Random randomize;
 
@@ -114,6 +168,73 @@ namespace BankingProgramWPF
             }
         }
 
+        /// <summary>
+        /// Выбор пользователя и его счетов
+        /// </summary>
+        private IUsers selectedAccounts;
+
+        /// <summary>
+        /// Свойство пользователя и его счетов
+        /// </summary>
+        public IUsers SelectedAccounts
+        {
+            get { return selectedAccounts; }
+            set
+            {
+                selectedAccounts = value;
+                AccountsIntermediateValue = Accounts.Where(a => value.Id == a.IdUser).ToList();
+                OnPropertyChanged("SelectedAccounts");
+            }
+        }
+
+        /// <summary>
+        /// Выбор типа счета
+        /// </summary>
+        private string selectedTypeAccounts;
+
+        /// <summary>
+        /// Свойство выбора типа счета
+        /// </summary>
+        public string SelectedTypeAccounts
+        {
+            get
+            {
+                return selectedTypeAccounts;
+            }
+            set
+            {
+                selectedTypeAccounts = value;
+                if (value == "Недепозитный")
+                {
+                    MainWindow.staticPropertyStorageArray[6] = "Недепозитный";
+                }
+
+                if (value == "Депозитный")
+                {
+                    MainWindow.staticPropertyStorageArray[6] = "Депозитный";
+                }
+                OnPropertyChanged("SelectedUserWPF");
+            }
+        }
+
+        /// <summary>
+        /// выбор счета
+        /// </summary>
+        private Accounts<ulong, string, ulong> selectedAccountList;
+
+        /// <summary>
+        /// Свойство выбора счета
+        /// </summary>
+        public Accounts<ulong, string, ulong> SelectedAccountList
+        {
+            get { return selectedAccountList; }
+            set
+            {
+                selectedAccountList = value;
+                OnPropertyChanged("SelectedAccountList");
+            }
+        }
+
 
 
         /// <summary>
@@ -123,8 +244,11 @@ namespace BankingProgramWPF
         {
             User = new List<IUsers>();
             UserList = new List<IUsers>();
+            Accounts = new List<Accounts<ulong, string, ulong>>();
+            AccountsIntermediateValue = new List<Accounts<ulong, string, ulong>>();
             randomize = new Random();
             FillingCollectionWithUsers();
+            FillingCollectionWithAccount();
             UserList = User;
         }
 
@@ -140,6 +264,18 @@ namespace BankingProgramWPF
                 var userDateTimeNow = DateTime.Now;
                 User.Add(new ConsultantUsers($"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "Менеджер", true));
                 User.Add(new Manager($"Фамилия {i}", $"Имя {i}", $"Отчество {i}", userPhoneNumber, userSeriesNumberPassport, userDateTimeNow, "-", "Добавлена новая запись", "Менеджер", false));
+            }
+        }
+
+        /// <summary>
+        /// Метод для наполнения коллекции счетами
+        /// </summary>
+        public void FillingCollectionWithAccount()
+        {
+            for (ulong i = 1; i < 21; i++)
+            {
+                Accounts.Add(new Accounts<ulong, string, ulong>(i, "Недепозитный", Convert.ToUInt64(randomize.Next(0, 100000))));
+                Accounts.Add(new Accounts<ulong, string, ulong>(i, "Депозитный", Convert.ToUInt64(randomize.Next(0, 100000))));
             }
         }
 
@@ -199,14 +335,14 @@ namespace BankingProgramWPF
                   (addUser = new RelayCommand(obj =>
                   {
                       var date = DateTime.Now;
-                      if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[1]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]))
+                      if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[1]) || string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[2]) || string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[2]))
                       {
                           MessageBox.Show("Необходимо заполнить обязательные поля: Фамилия, Имя, отчество");
                       }
                       else
                       {
-                          ConsultantUsers cu = new ConsultantUsers($"{MainWindow.staticArrayUserProperties[1]}", $"{MainWindow.staticArrayUserProperties[2]}", $"{MainWindow.staticArrayUserProperties[3]}", $"{MainWindow.staticArrayUserProperties[4]}", $"{MainWindow.staticArrayUserProperties[5]}", date, "-", "Добавлена новая запись", "Менеджер", true);
-                          Manager m = new Manager($"{MainWindow.staticArrayUserProperties[1]}", $"{MainWindow.staticArrayUserProperties[2]}", $"{MainWindow.staticArrayUserProperties[3]}", $"{MainWindow.staticArrayUserProperties[4]}", $"{MainWindow.staticArrayUserProperties[5]}", date, "-", "Добавлена новая запись", "Менеджер", false);
+                          ConsultantUsers cu = new ConsultantUsers($"{MainWindow.staticPropertyStorageArray[1]}", $"{MainWindow.staticPropertyStorageArray[2]}", $"{MainWindow.staticPropertyStorageArray[3]}", $"{MainWindow.staticPropertyStorageArray[4]}", $"{MainWindow.staticPropertyStorageArray[5]}", date, "-", "Добавлена новая запись", "Менеджер", true);
+                          Manager m = new Manager($"{MainWindow.staticPropertyStorageArray[1]}", $"{MainWindow.staticPropertyStorageArray[2]}", $"{MainWindow.staticPropertyStorageArray[3]}", $"{MainWindow.staticPropertyStorageArray[4]}", $"{MainWindow.staticPropertyStorageArray[5]}", date, "-", "Добавлена новая запись", "Менеджер", false);
                           User.Add(cu);
                           User.Add(m);
                           SelectedUser = cu;
@@ -229,7 +365,7 @@ namespace BankingProgramWPF
                   {
                       var date = DateTime.Now;
                       MainWindow.changedFields = "Изменено: ";
-                      if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[1]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]) || string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[2]))
+                      if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[1]) || string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[2]) || string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[2]))
                       {
                           MessageBox.Show($"Необходимо выбрать пользователя и заполнить обязательные поля: Фамилия, Имя, отчество");
                       }
@@ -239,34 +375,34 @@ namespace BankingProgramWPF
                           {
                               for (int i = 0; i < user.Count; i++)
                               {
-                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]) && user[i].GetType() == typeof(Manager))
+                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticPropertyStorageArray[0]) && user[i].GetType() == typeof(Manager))
                                   {
-                                      if (user[i].Surname != MainWindow.staticArrayUserProperties[1])
+                                      if (user[i].Surname != MainWindow.staticPropertyStorageArray[1])
                                       {
                                           MainWindow.changedFields += "Surname";
                                       }
 
-                                      if (user[i].Name != MainWindow.staticArrayUserProperties[2])
+                                      if (user[i].Name != MainWindow.staticPropertyStorageArray[2])
                                       {
                                           MainWindow.changedFields += ", Name";
                                       }
 
-                                      if (user[i].MiddleName != MainWindow.staticArrayUserProperties[3])
+                                      if (user[i].MiddleName != MainWindow.staticPropertyStorageArray[3])
                                       {
                                           MainWindow.changedFields += ", MiddleName";
                                       }
 
-                                      if (user[i].PhoneNumber != MainWindow.staticArrayUserProperties[4])
+                                      if (user[i].PhoneNumber != MainWindow.staticPropertyStorageArray[4])
                                       {
                                           MainWindow.changedFields += ", PhoneNumber";
                                       }
 
-                                      if (user[i].SeriesNumberPassport != MainWindow.staticArrayUserProperties[5])
+                                      if (user[i].SeriesNumberPassport != MainWindow.staticPropertyStorageArray[5])
                                       {
                                           MainWindow.changedFields += ", SeriesNumberPassport";
                                       }
 
-                                      ChangingParametersManager(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[1], MainWindow.staticArrayUserProperties[2], MainWindow.staticArrayUserProperties[3], MainWindow.staticArrayUserProperties[4], MainWindow.staticArrayUserProperties[5], MainWindow.changedFields);
+                                      ChangingParametersManager(MainWindow.staticPropertyStorageArray[0], MainWindow.staticPropertyStorageArray[1], MainWindow.staticPropertyStorageArray[2], MainWindow.staticPropertyStorageArray[3], MainWindow.staticPropertyStorageArray[4], MainWindow.staticPropertyStorageArray[5], MainWindow.changedFields);
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
@@ -277,13 +413,13 @@ namespace BankingProgramWPF
                           {
                               for (int i = 0; i < user.Count; i++)
                               {
-                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]) && user[i].GetType() == typeof(ConsultantUsers))
+                                  if (user[i].Id == Convert.ToUInt64(MainWindow.staticPropertyStorageArray[0]) && user[i].GetType() == typeof(ConsultantUsers))
                                   {
-                                      if (user[i].PhoneNumber != MainWindow.staticArrayUserProperties[4])
+                                      if (user[i].PhoneNumber != MainWindow.staticPropertyStorageArray[4])
                                       {
                                           MainWindow.changedFields += "PhoneNumber";
                                       }
-                                      ChangingParametersConsultant(MainWindow.staticArrayUserProperties[0], MainWindow.staticArrayUserProperties[4], MainWindow.changedFields);
+                                      ChangingParametersConsultant(MainWindow.staticPropertyStorageArray[0], MainWindow.staticPropertyStorageArray[4], MainWindow.changedFields);
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
@@ -305,13 +441,13 @@ namespace BankingProgramWPF
                 return deleteUser ??
                     (deleteUser = new RelayCommand(obj =>
                     {
-                        if (string.IsNullOrEmpty(MainWindow.staticArrayUserProperties[0]))
+                        if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[0]))
                         {
                             MessageBox.Show($"Необходимо выбрать пользователя для удаления");
                         }
                         else
                         {
-                            Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticArrayUserProperties[0]), user);
+                            Manager.RemoveEntry(Convert.ToUInt64(MainWindow.staticPropertyStorageArray[0]), user);
                         }
                         UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
                         UserList = User;
@@ -336,6 +472,116 @@ namespace BankingProgramWPF
             }
         }
 
+        /// <summary>
+        /// Команда добавления счета
+        /// </summary>
+        private RelayCommand addAccounts;
 
+        /// <summary>
+        /// Свойство команды добавления счета
+        /// </summary>
+        public RelayCommand AddAccounts
+        {
+            get
+            {
+                return addAccounts ??
+                  (addAccounts = new RelayCommand(obj =>
+                  {
+                      if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[6]))
+                      {
+                          MessageBox.Show("Необходимо выбрать тип создаваемого счета");
+                      }
+                      else
+                      {
+                          if (Accounts.Exists(ac => ac.IdUser == SelectedAccounts.Id && ac.AccountType == MainWindow.staticPropertyStorageArray[6]))
+                          {
+                              MessageBox.Show($"{MainWindow.staticPropertyStorageArray[6]} счет уже открыт, нельзя еще раз его открыть");
+                          }
+                          else
+                          {
+                              Accounts<ulong, string, ulong> a = new Accounts<ulong, string, ulong>(SelectedAccounts.Id, $"{MainWindow.staticPropertyStorageArray[6]}", 0);
+                              Accounts.Add(a);
+                              SelectedAccountList = a;
+                          }                          
+                      }
+                      AccountsIntermediateValue = Accounts.Where(a => SelectedAccounts.Id == a.IdUser).ToList();
+                  }));
+            }
+        }
+
+        /// <summary>
+        /// Команда удаления счета
+        /// </summary>
+        private RelayCommand removeAccounts;
+
+        /// <summary>
+        /// Свойство команды удаления счета
+        /// </summary>
+        public RelayCommand RemoveAccounts
+        {
+            get
+            {
+                return removeAccounts ??
+                  (removeAccounts = new RelayCommand(obj =>
+                  {
+                      
+
+                      if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[7]))
+                      {
+                          MessageBox.Show("Необходимо выбрать счет для закрытия");
+                      }
+                      else
+                      {
+                          if (Accounts.Exists(ac => ac.MoneyBalance == 0))
+                          {
+                              Accounts.RemoveAll(ra => ra.IdAccounts == Convert.ToUInt64(MainWindow.staticPropertyStorageArray[7]));
+                          }
+                          else
+                          {
+                              MessageBox.Show($"счет с ID = {MainWindow.staticPropertyStorageArray[7]} имеет баланс: {MainWindow.staticPropertyStorageArray[8]}, необходимо сначала перевести на другой счет, а потом закрывать");
+                          }
+                      }
+                      AccountsIntermediateValue = Accounts.Where(a => SelectedAccounts.Id == a.IdUser).ToList();
+                  }));
+            }
+        }
+
+        /// <summary>
+        /// Команда перевода между счетами клиент
+        /// </summary>
+        private RelayCommand transferСustomerAccounts;
+
+        /// <summary>
+        /// Свойство команды перевода между счетами клиент
+        /// </summary>
+        public RelayCommand TransferСustomerAccounts
+        {
+            get
+            {
+                return transferСustomerAccounts ??
+                  (transferСustomerAccounts = new RelayCommand(obj =>
+                  {
+
+
+                      if (string.IsNullOrEmpty(MainWindow.staticPropertyStorageArray[7]))
+                      {
+                          MessageBox.Show("Необходимо выбрать счет с которого будут сняты средства и указать сумму перевода");
+                      }
+                      else
+                      {
+                          if (Convert.ToUInt64(MainWindow.staticPropertyStorageArray[8]) >= Convert.ToUInt64(MainWindow.staticPropertyStorageArray[9]))
+                          {
+                              Accounts.FindAll(ac => ac.IdAccounts == Convert.ToUInt64(MainWindow.staticPropertyStorageArray[7])).ForEach(ac => ac.MoneyBalance -= Convert.ToUInt64(MainWindow.staticPropertyStorageArray[9]));
+                              Accounts.FindAll(ac => ac.IdUser == SelectedAccounts.Id && ac.IdAccounts != Convert.ToUInt64(MainWindow.staticPropertyStorageArray[7])).ForEach(ac => ac.MoneyBalance += Convert.ToUInt64(MainWindow.staticPropertyStorageArray[9]));
+                          }
+                          else
+                          {
+                              MessageBox.Show("Невозможно со счета снять денег больше чем там есть");
+                          }
+                      }
+                      AccountsIntermediateValue = Accounts.Where(a => SelectedAccounts.Id == a.IdUser).ToList();
+                  }));
+            }
+        }
     }
 }

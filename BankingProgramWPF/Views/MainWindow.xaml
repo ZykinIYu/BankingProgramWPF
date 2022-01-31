@@ -23,13 +23,14 @@
                     <ColumnDefinition Width="70*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListView x:Name="lvWorkers" 
-                  Grid.Column="2" 
-                  Margin="10"
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"
-                  ItemsSource="{Binding UserIntermediateValue}"
-                  SelectedItem="{Binding SelectedUser}">
+                <ListView 
+                    x:Name="lvWorkers" 
+                    Grid.Column="2" 
+                    Margin="10"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    ItemsSource="{Binding UserIntermediateValue}"
+                    SelectedItem="{Binding SelectedUser}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
@@ -46,102 +47,106 @@
                     </ListView.View>
                 </ListView>
                 <StackPanel 
-            HorizontalAlignment="Stretch" 
-            Margin="10" 
-            VerticalAlignment="Stretch">
+                    HorizontalAlignment="Stretch" 
+                    Margin="10" 
+                    VerticalAlignment="Stretch">
                     <ComboBox
-                x:Name="userWPFTypes"
-                Margin="10" 
-                SelectionChanged="UserWPFTypes_SelectionChanged"
-                ItemsSource="{Binding UserTypes}"
-                SelectedItem="{Binding SelectedUserWPF}">
+                        x:Name="userWPFTypes"
+                        Margin="10" 
+                        SelectionChanged="UserWPFTypes_SelectionChanged"
+                        ItemsSource="{Binding UserTypes}"
+                        SelectedItem="{Binding SelectedUserWPF}">
                     </ComboBox>
-
+                    
                     <TextBox 
-                x:Name="idTB"
-                Margin="10 0 10 10"
-                IsReadOnly="True"
-                Text="{Binding SelectedUser.Id}" 
-                TextChanged="idTB_TextChanged"/>
+                        x:Name="idTB"
+                        Margin="10 0 10 10"
+                        IsReadOnly="True"
+                        Text="{Binding SelectedUser.Id}" 
+                        TextChanged="idTB_TextChanged"/>
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Фамилия"/>
+                        Margin="10 0 10 10"
+                        Text="Фамилия"/>
 
                     <TextBox 
-                x:Name="surnameTB"
-                Margin="10 0 10 10" 
-                Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" 
-                TextChanged="surnameTB_TextChanged"/>
+                        x:Name="surnameTB"
+                        Margin="10 0 10 10" 
+                        Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsReadOnly="True" 
+                        TextChanged="surnameTB_TextChanged"/>
+
+                    <TextBlock                 
+                        Margin="10 0 10 10"               
+                        Text="Имя"/>
+
+                    <TextBox 
+                        x:Name="nameTB"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsReadOnly="True"
+                        TextChanged="nameTB_TextChanged"/>
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Имя"/>
+                        Margin="10 0 10 10"
+                        Text="Отчество"/>
 
                     <TextBox 
-                x:Name="nameTB"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="nameTB_TextChanged"/>
+                        x:Name="middleNameTB"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsReadOnly="True" 
+                        TextChanged="middleNameTB_TextChanged"/>
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Отчество"/>
+                        Margin="10 0 10 10"
+                        Text="Номер телефона"/>
 
                     <TextBox 
-                x:Name="middleNameTB"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="middleNameTB_TextChanged"/>
+                        x:Name="phoneNumberTB"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsReadOnly="True" 
+                        TextChanged="phoneNumberTB_TextChanged"/>
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Номер телефона"/>
+                        Margin="10 0 10 10"
+                        Text="Серия и номер паспорта"/>
 
                     <TextBox 
-                x:Name="phoneNumberTB"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="phoneNumberTB_TextChanged"/>
-
-                    <TextBlock 
-                Margin="10 0 10 10"
-                Text="Серия и номер паспорта"/>
-
-                    <TextBox 
-                x:Name="seriesNumberPassportTB"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="seriesNumberPassportTB_TextChanged"/>
+                        x:Name="seriesNumberPassportTB"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsReadOnly="True" 
+                        TextChanged="seriesNumberPassportTB_TextChanged"/>
 
                     <Button 
-                x:Name="addUser"
-                Content="Добавить"
-                Margin="10 0 10 10" 
-                Command="{Binding AddUser}"
-                IsEnabled="False"/>
+                        x:Name="addUser"
+                        Content="Добавить"
+                        Margin="10 0 10 10" 
+                        Command="{Binding AddUser}"
+                        IsEnabled="False"/>
 
                     <Button
-                x:Name="create"
-                Content="Редактировать"
-                Margin="10 0 10 10"
-                Command="{Binding EditUser}"
-                IsEnabled="False"/>
+                        x:Name="create"
+                        Content="Редактировать"
+                        Margin="10 0 10 10"
+                        Command="{Binding EditUser}"
+                        IsEnabled="False"/>
 
                     <Button 
-                x:Name="remove"
-                Content="Удалить"
-                Margin="10 0 10 10"
-                Command="{Binding DeleteUser}"
-                IsEnabled="False"/>
+                        x:Name="remove"
+                        Content="Удалить"
+                        Margin="10 0 10 10"
+                        Command="{Binding DeleteUser}"
+                        IsEnabled="False"/>
 
                     <Button 
-                x:Name="sortAlphabetically"
-                Content="Сортировать по алфавиту"
-                Margin="10 0 10 10"
-                IsEnabled="False"
-                Command="{Binding SortSurnameUser}"/>
+                        x:Name="sortAlphabetically"
+                        Content="Сортировать по алфавиту"
+                        Margin="10 0 10 10"
+                        IsEnabled="False"
+                        Command="{Binding SortSurnameUser}"/>
                 </StackPanel>
             </Grid>
         </TabItem>
@@ -155,38 +160,33 @@
                     <ColumnDefinition Width="70*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListView x:Name="lvWorkers_" 
-                  Grid.Column="2" 
-                  Margin="10"
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"
-                  ItemsSource="{Binding UserIntermediateValue}"
-                  SelectedItem="{Binding SelectedUser}">
+                <ListView 
+                    x:Name="accountsWPF" 
+                    Grid.Column="2" 
+                    Margin="10"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    ItemsSource="{Binding AccountsIntermediateValue}"
+                    SelectedItem="{Binding SelectedAccountList}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding Surname}"/>
-                            <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding MiddleName}"/>
-                            <GridViewColumn Header="Номер телефона" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                            <GridViewColumn Header="Серия и № паспорта" DisplayMemberBinding="{Binding SeriesNumberPassport}"/>
-                            <GridViewColumn Header="Дата изменения" DisplayMemberBinding="{Binding DateTimeEntryModified}"/>
-                            <GridViewColumn Header="Что изменено" DisplayMemberBinding="{Binding WhatDataChanged}"/>
-                            <GridViewColumn Header="Тип изменения" DisplayMemberBinding="{Binding TypeChange}"/>
-                            <GridViewColumn Header="Кто изменил" DisplayMemberBinding="{Binding WhoChangedData}"/>
+                            <GridViewColumn Header="ID пользователя" DisplayMemberBinding="{Binding IdUser}"/>
+                            <GridViewColumn Header="ID счета" DisplayMemberBinding="{Binding IdAccounts}"/>
+                            <GridViewColumn Header="Тип счета" DisplayMemberBinding="{Binding AccountType}"/>
+                            <GridViewColumn Header="Денежный баланс" DisplayMemberBinding="{Binding MoneyBalance}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
                 <StackPanel 
-            HorizontalAlignment="Stretch" 
-            Margin="10" 
-            VerticalAlignment="Stretch">
+                    HorizontalAlignment="Stretch" 
+                    Margin="10" 
+                    VerticalAlignment="Stretch">
                     <ComboBox
-                x:Name="userWPF"
-                Margin="10" 
-                SelectionChanged="UserWPFTypes_SelectionChanged"
-                ItemsSource="{Binding UserList}"
-                SelectedItem="{Binding SelectedUserWPF}">
+                        x:Name="userWPF"
+                        Margin="10"
+                        ItemsSource="{Binding UserList}"
+                        SelectedItem="{Binding SelectedAccounts}" 
+                        SelectionChanged="userWPF_SelectionChanged">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding NameString}"/>
@@ -194,91 +194,83 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <TextBox 
-                x:Name="idTB_"
+                    <!--<TextBox 
+                x:Name="idTB2"
                 Margin="10 0 10 10"
                 IsReadOnly="True"
-                Text="{Binding SelectedUser.Id}" 
-                TextChanged="idTB_TextChanged"/>
+                Text="{Binding SelectedAccounts.Id}" 
+                TextChanged="idTB2_TextChanged"/>-->
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Фамилия"/>
+                        Margin="10 0 10 10"
+                        Text="Тип счета"/>
 
-                    <TextBox 
-                x:Name="surnameTB_"
-                Margin="10 0 10 10" 
-                Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" 
-                TextChanged="surnameTB_TextChanged"/>
+                    <ComboBox 
+                        x:Name="accountTypeWPF"
+                        Margin="10" 
+                        ItemsSource="{Binding AccountsTypes}"
+                        SelectedItem="{Binding SelectedTypeAccounts}"
+                        IsEnabled="False"/>
 
-                    <TextBlock 
-                Margin="10 0 10 10"
-                Text="Имя"/>
-
-                    <TextBox 
-                x:Name="nameTB_"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="nameTB_TextChanged"/>
 
                     <TextBlock 
-                Margin="10 0 10 10"
-                Text="Отчество"/>
+                        Margin="10 0 10 10"
+                        Text="Денежный баланс"/>
 
                     <TextBox 
-                x:Name="middleNameTB_"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="middleNameTB_TextChanged"/>
-
-                    <TextBlock 
-                Margin="10 0 10 10"
-                Text="Номер телефона"/>
-
-                    <TextBox 
-                x:Name="phoneNumberTB_"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="phoneNumberTB_TextChanged"/>
-
-                    <TextBlock 
-                Margin="10 0 10 10"
-                Text="Серия и номер паспорта"/>
-
-                    <TextBox 
-                x:Name="seriesNumberPassportTB_"
-                Margin="10 0 10 10"
-                Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                IsReadOnly="True" TextChanged="seriesNumberPassportTB_TextChanged"/>
+                        x:Name="moneyBalanceWPF"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedAccountList.MoneyBalance, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsEnabled="False" TextChanged="moneyBalanceWPF_TextChanged"/>
 
                     <Button 
-                x:Name="addUser_"
-                Content="Добавить"
-                Margin="10 0 10 10" 
-                Command="{Binding AddUser}"
-                IsEnabled="False"/>
+                        x:Name="openAccountWPF"
+                        Content="Открыть счет"
+                        Margin="10 0 10 10" 
+                        Command="{Binding AddAccounts}"
+                        IsEnabled="False"/>
+
+                    <TextBlock 
+                        Margin="10 0 10 10"
+                        Text="Выбирите счет для удаления, или списания баланса:"/>
+
+                    <TextBox 
+                        x:Name="IDRemoveAccountWPF"
+                        Margin="10 0 10 10"
+                        Text="{Binding SelectedAccountList.IdAccounts, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        IsEnabled="False" 
+                        TextChanged="IDRemoveAccountWPF_TextChanged"/>
 
                     <Button
-                x:Name="create_"
-                Content="Редактировать"
-                Margin="10 0 10 10"
-                Command="{Binding EditUser}"
-                IsEnabled="False"/>
+                        x:Name="removeAccountWPF"
+                        Content="Закрыть счет"
+                        Margin="10 0 10 10"
+                        Command="{Binding RemoveAccounts}"
+                        IsEnabled="False"/>
+
+                    <TextBlock 
+                        Margin="10 0 10 10"
+                        Text="Укажите сумму для перевода:"/>
+
+                    <TextBox 
+                        x:Name="TransferСustomerAccountsWPF"
+                        Margin="10 0 10 10"
+                        IsEnabled="False" 
+                        TextChanged="TransferСustomerAccountsWPF_TextChanged"/>
 
                     <Button 
-                x:Name="remove_"
-                Content="Удалить"
-                Margin="10 0 10 10"
-                Command="{Binding DeleteUser}"
-                IsEnabled="False"/>
+                        x:Name="TransferСustomerAccountsButtonWPF"
+                        Content="Перевод между своими счетами"
+                        Margin="10 0 10 10"
+                        Command="{Binding TransferСustomerAccounts}"
+                        IsEnabled="False"/>
 
                     <Button 
-                x:Name="sortAlphabetically_"
-                Content="Сортировать по алфавиту"
-                Margin="10 0 10 10"
-                IsEnabled="False"
-                Command="{Binding SortSurnameUser}"/>
+                        x:Name="sortAlphabetically_"
+                        Content="Сортировать по алфавиту"
+                        Margin="10 0 10 10"
+                        IsEnabled="False"
+                        Command="{Binding SortSurnameUser}"/>
                 </StackPanel>
             </Grid>
         </TabItem>

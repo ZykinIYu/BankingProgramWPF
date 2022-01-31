@@ -11,13 +11,13 @@ namespace BankingProgramWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string[] staticArrayUserProperties;
+        public static string[] staticPropertyStorageArray;
         public static string changedFields;
 
         public MainWindow()
         {
             InitializeComponent();
-            staticArrayUserProperties = new string[6];
+            staticPropertyStorageArray = new string[10];
             DataContext = new MainWindowViewModel();
         }
 
@@ -58,32 +58,70 @@ namespace BankingProgramWPF
 
         private void idTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[0] = idTB.Text;
+            staticPropertyStorageArray[0] = idTB.Text;
         }
 
         private void surnameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[1] = surnameTB.Text;
+            staticPropertyStorageArray[1] = surnameTB.Text;
         }
 
         private void nameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[2] = nameTB.Text;
+            staticPropertyStorageArray[2] = nameTB.Text;
         }
 
         private void middleNameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[3] = middleNameTB.Text;
+            staticPropertyStorageArray[3] = middleNameTB.Text;
         }
 
         private void phoneNumberTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[4] = phoneNumberTB.Text;
+            staticPropertyStorageArray[4] = phoneNumberTB.Text;
         }
 
         private void seriesNumberPassportTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticArrayUserProperties[5] = seriesNumberPassportTB.Text;
+            staticPropertyStorageArray[5] = seriesNumberPassportTB.Text;
+        }
+
+        /// <summary>
+        /// Событие при выборе в выпадающем списке пользователя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void userWPF_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Convert.ToString(userWPF.SelectedValue)))
+            {
+                accountTypeWPF.IsEnabled = true;
+                //moneyBalanceWPF.IsEnabled = true;
+                openAccountWPF.IsEnabled = true;
+                //IDRemoveAccountWPF.IsEnabled = true;
+                removeAccountWPF.IsEnabled = true;
+                //accountTypeWPF.IsEnabled = true;
+                //accountTypeWPF.IsEnabled = true;
+                //accountTypeWPF.IsEnabled = true;
+                TransferСustomerAccountsWPF.IsEnabled = true;
+                TransferСustomerAccountsButtonWPF.IsEnabled = true;
+            }
+
+        }
+
+        private void IDRemoveAccountWPF_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticPropertyStorageArray[7] = IDRemoveAccountWPF.Text;
+        }
+
+        private void moneyBalanceWPF_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticPropertyStorageArray[8] = moneyBalanceWPF.Text;
+        }
+
+        private void TransferСustomerAccountsWPF_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            staticPropertyStorageArray[9] = TransferСustomerAccountsWPF.Text;
         }
     }
 }
