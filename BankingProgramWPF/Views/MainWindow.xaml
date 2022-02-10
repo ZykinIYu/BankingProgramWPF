@@ -57,13 +57,6 @@
                         ItemsSource="{Binding UserTypes}"
                         SelectedItem="{Binding SelectedUserWPF}">
                     </ComboBox>
-                    
-                    <TextBox 
-                        x:Name="idTB"
-                        Margin="10 0 10 10"
-                        IsReadOnly="True"
-                        Text="{Binding SelectedUser.Id}" 
-                        TextChanged="idTB_TextChanged"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -73,8 +66,7 @@
                         x:Name="surnameTB"
                         Margin="10 0 10 10" 
                         Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" 
-                        TextChanged="surnameTB_TextChanged"/>
+                        IsReadOnly="True" TextChanged="surnameTB_TextChanged"/>
 
                     <TextBlock                 
                         Margin="10 0 10 10"               
@@ -84,8 +76,7 @@
                         x:Name="nameTB"
                         Margin="10 0 10 10"
                         Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True"
-                        TextChanged="nameTB_TextChanged"/>
+                        IsReadOnly="True" TextChanged="nameTB_TextChanged"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -95,8 +86,7 @@
                         x:Name="middleNameTB"
                         Margin="10 0 10 10"
                         Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" 
-                        TextChanged="middleNameTB_TextChanged"/>
+                        IsReadOnly="True" TextChanged="middleNameTB_TextChanged"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -106,8 +96,7 @@
                         x:Name="phoneNumberTB"
                         Margin="10 0 10 10"
                         Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" 
-                        TextChanged="phoneNumberTB_TextChanged"/>
+                        IsReadOnly="True" TextChanged="phoneNumberTB_TextChanged"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -117,8 +106,7 @@
                         x:Name="seriesNumberPassportTB"
                         Margin="10 0 10 10"
                         Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" 
-                        TextChanged="seriesNumberPassportTB_TextChanged"/>
+                        IsReadOnly="True" TextChanged="seriesNumberPassportTB_TextChanged"/>
 
                     <Button 
                         x:Name="addUser"
@@ -212,17 +200,6 @@
                         SelectedItem="{Binding SelectedTypeAccounts}"
                         IsEnabled="False"/>
 
-
-                    <TextBlock 
-                        Margin="10 0 10 10"
-                        Text="Денежный баланс"/>
-
-                    <TextBox 
-                        x:Name="moneyBalanceWPF"
-                        Margin="10 0 10 10"
-                        Text="{Binding SelectedAccountList.MoneyBalance, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsEnabled="False" TextChanged="moneyBalanceWPF_TextChanged"/>
-
                     <Button 
                         x:Name="openAccountWPF"
                         Content="Открыть счет"
@@ -238,8 +215,7 @@
                         x:Name="IDRemoveAccountWPF"
                         Margin="10 0 10 10"
                         Text="{Binding SelectedAccountList.IdAccounts, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsEnabled="False" 
-                        TextChanged="IDRemoveAccountWPF_TextChanged"/>
+                        IsEnabled="False"/>
 
                     <Button
                         x:Name="removeAccountWPF"

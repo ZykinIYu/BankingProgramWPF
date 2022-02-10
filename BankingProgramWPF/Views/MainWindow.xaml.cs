@@ -1,4 +1,5 @@
 ﻿using BankingProgram;
+using BankingProgramWPF.ViewModels;
 using System;
 using System.Linq;
 using System.Windows;
@@ -11,13 +12,11 @@ namespace BankingProgramWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string[] staticPropertyStorageArray;
         public static string changedFields;
 
         public MainWindow()
         {
             InitializeComponent();
-            staticPropertyStorageArray = new string[10];
             DataContext = new MainWindowViewModel();
         }
 
@@ -56,36 +55,6 @@ namespace BankingProgramWPF
             }
         }
 
-        private void idTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[0] = idTB.Text;
-        }
-
-        private void surnameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[1] = surnameTB.Text;
-        }
-
-        private void nameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[2] = nameTB.Text;
-        }
-
-        private void middleNameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[3] = middleNameTB.Text;
-        }
-
-        private void phoneNumberTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[4] = phoneNumberTB.Text;
-        }
-
-        private void seriesNumberPassportTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            staticPropertyStorageArray[5] = seriesNumberPassportTB.Text;
-        }
-
         /// <summary>
         /// Событие при выборе в выпадающем списке пользователя
         /// </summary>
@@ -96,32 +65,43 @@ namespace BankingProgramWPF
             if (!string.IsNullOrEmpty(Convert.ToString(userWPF.SelectedValue)))
             {
                 accountTypeWPF.IsEnabled = true;
-                //moneyBalanceWPF.IsEnabled = true;
                 openAccountWPF.IsEnabled = true;
-                //IDRemoveAccountWPF.IsEnabled = true;
                 removeAccountWPF.IsEnabled = true;
-                //accountTypeWPF.IsEnabled = true;
-                //accountTypeWPF.IsEnabled = true;
-                //accountTypeWPF.IsEnabled = true;
                 TransferСustomerAccountsWPF.IsEnabled = true;
                 TransferСustomerAccountsButtonWPF.IsEnabled = true;
             }
 
         }
 
-        private void IDRemoveAccountWPF_TextChanged(object sender, TextChangedEventArgs e)
+        
+        private void surnameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticPropertyStorageArray[7] = IDRemoveAccountWPF.Text;
+            StaticData.SurnameTB = surnameTB.Text;
         }
 
-        private void moneyBalanceWPF_TextChanged(object sender, TextChangedEventArgs e)
+        private void nameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticPropertyStorageArray[8] = moneyBalanceWPF.Text;
+            StaticData.NameTB = nameTB.Text;
+        }
+
+        private void middleNameTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StaticData.MiddleNameTB = middleNameTB.Text;
+        }
+
+        private void phoneNumberTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StaticData.PhoneNumberTB = phoneNumberTB.Text;
+        }
+
+        private void seriesNumberPassportTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StaticData.SeriesNumberPassportTB = seriesNumberPassportTB.Text;
         }
 
         private void TransferСustomerAccountsWPF_TextChanged(object sender, TextChangedEventArgs e)
         {
-            staticPropertyStorageArray[9] = TransferСustomerAccountsWPF.Text;
+            StaticData.TransferСustomerAccountsWPF = TransferСustomerAccountsWPF.Text;
         }
     }
 }

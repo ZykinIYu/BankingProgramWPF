@@ -1,4 +1,5 @@
 ﻿using BankingProgramWPF;
+using BankingProgramWPF.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,8 @@ namespace BankingProgram
         {
             this.Id = NextId();
         }
+
+        //public event ValueChangedHandler ValueChanged;
 
         //public event EventHandler CanExecuteChanged;
 
@@ -90,5 +93,95 @@ namespace BankingProgram
             user.RemoveAll(us => us.Id == id);
         }
 
+
+        //private void SetTextSurname(string newTextSurname)
+        //{
+        //    if (Surname == newTextSurname)
+        //        return;
+
+        //    string oldTextSurname = Surname;
+        //    Surname = newTextSurname;
+
+        //    ValueChanged?.Invoke(this, nameof(Surname), oldTextSurname, Surname);
+        //}
+
+        //private void SetTextName(string newTextName)
+        //{
+        //    if (Name == newTextName)
+        //        return;
+
+        //    string oldTextName = Name;
+        //    Name = newTextName;
+
+        //    ValueChanged?.Invoke(this, nameof(Name), oldTextName, Name);
+        //}
+
+        //private void SetTextMiddleName(string newTextMiddleName)
+        //{
+        //    if (MiddleName == newTextMiddleName)
+        //        return;
+
+        //    string oldTextMiddleName = MiddleName;
+        //    MiddleName = newTextMiddleName;
+
+        //    ValueChanged?.Invoke(this, nameof(MiddleName), oldTextMiddleName, MiddleName);
+        //}
+
+        //private void SetTextPhoneNumber(string newTextPhoneNumber)
+        //{
+        //    if (PhoneNumber == newTextPhoneNumber)
+        //        return;
+
+        //    string oldTextPhoneNumber = PhoneNumber;
+        //    PhoneNumber = newTextPhoneNumber;
+
+        //    ValueChanged?.Invoke(this, nameof(PhoneNumber), oldTextPhoneNumber, PhoneNumber);
+        //}
+
+        //private void SetTextSeriesNumberPassport(string newTextSeriesNumberPassport)
+        //{
+        //    if (SeriesNumberPassport == newTextSeriesNumberPassport)
+        //        return;
+
+        //    string oldTextSeriesNumberPassport = SeriesNumberPassport;
+        //    SeriesNumberPassport = newTextSeriesNumberPassport;
+
+        //    ValueChanged?.Invoke(this, nameof(SeriesNumberPassport), oldTextSeriesNumberPassport, SeriesNumberPassport);
+        //}
+
+        //public void SendValue(string valueName, object newValue)
+        //{
+        //    switch (valueName)
+        //    {
+        //        case nameof(Surname): SetTextSurname((string)newValue); break;
+        //        case nameof(Name): SetTextName((string)newValue); break;
+        //        case nameof(MiddleName): SetTextMiddleName((string)newValue); break;
+        //        case nameof(PhoneNumber): SetTextPhoneNumber((string)newValue); break;
+        //        case nameof(SeriesNumberPassport): SetTextSeriesNumberPassport((string)newValue); break;
+        //        default: throw new ArgumentException(nameof(valueName));
+        //    }
+        //}
+
+        //public bool ValidateValue(string valueName, object newValue)
+        //{
+        //    switch (valueName)
+        //    {
+        //        case nameof(Surname): return newValue is string;
+        //        case nameof(Name): return newValue is string;
+        //        case nameof(MiddleName): return newValue is string;
+        //        case nameof(PhoneNumber): return newValue is string;
+        //        case nameof(SeriesNumberPassport): return newValue is string;
+        //        default: return false;
+        //    }
+        //}
+
+        //public void AllValueChanged()
+        //{
+        //    ValueChanged?.Invoke(this, nameof(Surname), null, Surname);
+        //    ValueChanged?.Invoke(this, nameof(Name), null, Name);
+        //    ValueChanged?.Invoke(this, nameof(MiddleName), null, MiddleName);
+        //    ValueChanged?.Invoke(this, nameof(PhoneNumber), null, PhoneNumber);
+        //    ValueChanged?.Invoke(this, nameof(SeriesNumberPassport), null, SeriesNumberPassport);
+        //}
     }
 }
