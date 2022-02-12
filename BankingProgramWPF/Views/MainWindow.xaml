@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:BankingProgramWPF"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="550" 
-        Width="1250"
+        Height="575.5" 
+        Width="1586"
         MinHeight="400"
         MinWidth="750">
     <TabControl 
@@ -19,8 +19,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="36*"/>
+                    <ColumnDefinition Width="64*"/>
                 </Grid.ColumnDefinitions>
 
                 <ListView 
@@ -65,8 +65,8 @@
                     <TextBox 
                         x:Name="surnameTB"
                         Margin="10 0 10 10" 
-                        Text="{Binding SelectedUser.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" TextChanged="surnameTB_TextChanged"/>
+                        Text="{Binding SurnameTranslate}"
+                        IsReadOnly="True"/>
 
                     <TextBlock                 
                         Margin="10 0 10 10"               
@@ -75,8 +75,8 @@
                     <TextBox 
                         x:Name="nameTB"
                         Margin="10 0 10 10"
-                        Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" TextChanged="nameTB_TextChanged"/>
+                        Text="{Binding NameTranslate}"
+                        IsReadOnly="True"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -85,8 +85,8 @@
                     <TextBox 
                         x:Name="middleNameTB"
                         Margin="10 0 10 10"
-                        Text="{Binding SelectedUser.MiddleName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" TextChanged="middleNameTB_TextChanged"/>
+                        Text="{Binding MiddleNameTranslate}"
+                        IsReadOnly="True"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -95,8 +95,8 @@
                     <TextBox 
                         x:Name="phoneNumberTB"
                         Margin="10 0 10 10"
-                        Text="{Binding SelectedUser.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" TextChanged="phoneNumberTB_TextChanged"/>
+                        Text="{Binding PhoneNumberTranslate}"
+                        IsReadOnly="True"/>
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -105,8 +105,8 @@
                     <TextBox 
                         x:Name="seriesNumberPassportTB"
                         Margin="10 0 10 10"
-                        Text="{Binding SelectedUser.SeriesNumberPassport, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                        IsReadOnly="True" TextChanged="seriesNumberPassportTB_TextChanged"/>
+                        Text="{Binding SeriesNumberPassportTranslate}"
+                        IsReadOnly="True"/>
 
                     <Button 
                         x:Name="addUser"
@@ -115,6 +115,10 @@
                         Command="{Binding AddUser}"
                         IsEnabled="False"/>
 
+                    <TextBlock 
+                        Margin="10 0 10 10"
+                        Text="Для редактирования, сначало нужно выбрать клиента и заполнить поля новыми значениями"/>
+                    
                     <Button
                         x:Name="create"
                         Content="Редактировать"
@@ -122,6 +126,10 @@
                         Command="{Binding EditUser}"
                         IsEnabled="False"/>
 
+                    <TextBlock 
+                        Margin="10 0 10 10"
+                        Text="Для удаления, сначало нужно выбрать клиента"/>
+                    
                     <Button 
                         x:Name="remove"
                         Content="Удалить"
@@ -231,8 +239,8 @@
                     <TextBox 
                         x:Name="TransferСustomerAccountsWPF"
                         Margin="10 0 10 10"
-                        IsEnabled="False" 
-                        TextChanged="TransferСustomerAccountsWPF_TextChanged"/>
+                        IsEnabled="False"
+                        Text="{Binding TransferСustomerAccountsTranslate}"/>
 
                     <Button 
                         x:Name="TransferСustomerAccountsButtonWPF"

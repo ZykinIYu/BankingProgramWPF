@@ -347,14 +347,14 @@ namespace BankingProgramWPF
                   (addUser = new RelayCommand(obj =>
                   {
                       var date = DateTime.Now;
-                      if (string.IsNullOrEmpty(SelectedUser.Surname) || string.IsNullOrEmpty(SelectedUser.Name) || string.IsNullOrEmpty(SelectedUser.MiddleName))
+                      if (string.IsNullOrEmpty(SurnameTranslate) || string.IsNullOrEmpty(NameTranslate) || string.IsNullOrEmpty(MiddleNameTranslate))
                       {
                           MessageBox.Show("Необходимо заполнить обязательные поля: Фамилия, Имя, отчество");
                       }
                       else
                       {
-                          ConsultantUsers cu = new ConsultantUsers($"{StaticData.SurnameTB}", $"{StaticData.NameTB}", $"{StaticData.MiddleNameTB}", $"{StaticData.PhoneNumberTB}", $"{StaticData.SeriesNumberPassportTB}", date, "-", "Добавлена новая запись", "Менеджер", true);
-                          Manager m = new Manager($"{StaticData.SurnameTB}", $"{StaticData.NameTB}", $"{StaticData.MiddleNameTB}", $"{StaticData.PhoneNumberTB}", $"{StaticData.SeriesNumberPassportTB}", date, "-", "Добавлена новая запись", "Менеджер", false);
+                          ConsultantUsers cu = new ConsultantUsers($"{SurnameTranslate}", $"{NameTranslate}", $"{MiddleNameTranslate}", $"{PhoneNumberTranslate}", $"{SeriesNumberPassportTranslate}", date, "-", "Добавлена новая запись", "Менеджер", true);
+                          Manager m = new Manager($"{SurnameTranslate}", $"{NameTranslate}", $"{MiddleNameTranslate}", $"{PhoneNumberTranslate}", $"{SeriesNumberPassportTranslate}", date, "-", "Добавлена новая запись", "Менеджер", false);
                           User.Add(cu);
                           User.Add(m);
                           SelectedUser = cu;
@@ -389,32 +389,32 @@ namespace BankingProgramWPF
                               {
                                   if (user[i].Id == SelectedUser.Id && user[i].GetType() == typeof(Manager))
                                   {
-                                      if (user[i].Surname != SelectedUser.Surname)
+                                      if (user[i].Surname != SurnameTranslate)
                                       {
                                           MainWindow.changedFields += "Surname";
                                       }
 
-                                      if (user[i].Name != SelectedUser.Name)
+                                      if (user[i].Name != NameTranslate)
                                       {
                                           MainWindow.changedFields += ", Name";
                                       }
 
-                                      if (user[i].MiddleName != SelectedUser.MiddleName)
+                                      if (user[i].MiddleName != MiddleNameTranslate)
                                       {
                                           MainWindow.changedFields += ", MiddleName";
                                       }
 
-                                      if (user[i].PhoneNumber != SelectedUser.PhoneNumber)
+                                      if (user[i].PhoneNumber != PhoneNumberTranslate)
                                       {
                                           MainWindow.changedFields += ", PhoneNumber";
                                       }
 
-                                      if (user[i].SeriesNumberPassport != SelectedUser.SeriesNumberPassport)
+                                      if (user[i].SeriesNumberPassport != SeriesNumberPassportTranslate)
                                       {
                                           MainWindow.changedFields += ", SeriesNumberPassport";
                                       }
 
-                                      ChangingParametersManager(Convert.ToString(SelectedUser.Id), StaticData.SurnameTB, StaticData.NameTB, StaticData.MiddleNameTB, StaticData.PhoneNumberTB, StaticData.SeriesNumberPassportTB, MainWindow.changedFields);
+                                      ChangingParametersManager(Convert.ToString(SelectedUser.Id), SurnameTranslate, NameTranslate, MiddleNameTranslate, PhoneNumberTranslate, SeriesNumberPassportTranslate, MainWindow.changedFields);
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
@@ -431,7 +431,7 @@ namespace BankingProgramWPF
                                       {
                                           MainWindow.changedFields += "PhoneNumber";
                                       }
-                                      ChangingParametersConsultant(Convert.ToString(SelectedUser.Id), StaticData.PhoneNumberTB, MainWindow.changedFields);
+                                      ChangingParametersConsultant(Convert.ToString(SelectedUser.Id), PhoneNumberTranslate, MainWindow.changedFields);
                                   }
                               }
                               UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
@@ -579,10 +579,10 @@ namespace BankingProgramWPF
                       }
                       else
                       {
-                          if (Convert.ToUInt64(SelectedAccountList.MoneyBalance) >= Convert.ToUInt64(StaticData.TransferСustomerAccountsWPF))
+                          if (Convert.ToUInt64(SelectedAccountList.MoneyBalance) >= Convert.ToUInt64(TransferСustomerAccountsTranslate))
                           {
-                              Accounts.FindAll(ac => ac.IdAccounts == SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance -= Convert.ToUInt64(StaticData.TransferСustomerAccountsWPF));
-                              Accounts.FindAll(ac => ac.IdUser == SelectedAccounts.Id && ac.IdAccounts != SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance += Convert.ToUInt64(StaticData.TransferСustomerAccountsWPF));
+                              Accounts.FindAll(ac => ac.IdAccounts == SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance -= Convert.ToUInt64(TransferСustomerAccountsTranslate));
+                              Accounts.FindAll(ac => ac.IdUser == SelectedAccounts.Id && ac.IdAccounts != SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance += Convert.ToUInt64(TransferСustomerAccountsTranslate));
                           }
                           else
                           {
@@ -593,5 +593,138 @@ namespace BankingProgramWPF
                   }));
             }
         }
+
+        /// <summary>
+        /// Фамилия для передачи
+        /// </summary>
+        private string surnameTranslate;
+
+        /// <summary>
+        /// Свойство фамилии для передачи
+        /// </summary>
+        public string SurnameTranslate 
+        {
+            get
+            {
+                return surnameTranslate;
+            }
+
+            set
+            {
+                surnameTranslate = value;
+                OnPropertyChanged("SurnameTranslate");
+            }
+        }
+
+        /// <summary>
+        /// Имя для передачи
+        /// </summary>
+        private string nameTranslate;
+
+        /// <summary>
+        /// Свойство Имени для передачи
+        /// </summary>
+        public string NameTranslate 
+        {
+            get
+            {
+                return nameTranslate;
+            }
+
+            set
+            {
+                nameTranslate = value;
+                OnPropertyChanged("NameTranslate");
+            }
+        }
+
+        /// <summary>
+        /// Отчество для передачи
+        /// </summary>
+        private string middleNameTranslate;
+
+        /// <summary>
+        /// Свойство Отчества для передачи
+        /// </summary>
+        public string MiddleNameTranslate 
+        {
+            get
+            {
+                return middleNameTranslate;
+            }
+
+            set
+            {
+                middleNameTranslate = value;
+                OnPropertyChanged("MiddleNameTranslate");
+            }
+        }
+
+        /// <summary>
+        /// Телефон для передачи
+        /// </summary>
+        private string phoneNumberTranslate;
+
+        /// <summary>
+        /// Свойство Номера телефона для передачи
+        /// </summary>
+        public string PhoneNumberTranslate 
+        {
+            get
+            {
+                return phoneNumberTranslate;
+            }
+
+            set
+            {
+                phoneNumberTranslate = value;
+                OnPropertyChanged("PhoneNumberTranslate");
+            }
+        }
+
+        /// <summary>
+        /// Серия и номер паспорта для передачи
+        /// </summary>
+        private string seriesNumberPassportTranslate;
+
+        /// <summary>
+        ///Свойство Серии и номера паспорта для передачи
+        /// </summary>
+        public string SeriesNumberPassportTranslate 
+        {
+            get
+            {
+                return seriesNumberPassportTranslate;
+            }
+
+            set
+            {
+                seriesNumberPassportTranslate = value;
+                OnPropertyChanged("SeriesNumberPassportTranslate");
+            }
+        }
+
+        /// <summary>
+        /// Сумма для перевода для передачи
+        /// </summary>
+        private string transferСustomerAccountsTranslate;
+
+        /// <summary>
+        /// Свойство Суммы для перевода для передачи
+        /// </summary>
+        public string TransferСustomerAccountsTranslate 
+        {
+            get
+            {
+                return transferСustomerAccountsTranslate;
+            }
+
+            set
+            {
+                transferСustomerAccountsTranslate = value;
+                OnPropertyChanged("TransferСustomerAccountsTranslate");
+            }
+        }
+
     }
 }

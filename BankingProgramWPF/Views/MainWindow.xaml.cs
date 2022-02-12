@@ -72,36 +72,5 @@ namespace BankingProgramWPF
             }
 
         }
-
-        
-        private void surnameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.SurnameTB = surnameTB.Text;
-        }
-
-        private void nameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.NameTB = nameTB.Text;
-        }
-
-        private void middleNameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.MiddleNameTB = middleNameTB.Text;
-        }
-
-        private void phoneNumberTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.PhoneNumberTB = phoneNumberTB.Text;
-        }
-
-        private void seriesNumberPassportTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.SeriesNumberPassportTB = seriesNumberPassportTB.Text;
-        }
-
-        private void TransferСustomerAccountsWPF_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            StaticData.TransferСustomerAccountsWPF = TransferСustomerAccountsWPF.Text;
-        }
     }
 }
