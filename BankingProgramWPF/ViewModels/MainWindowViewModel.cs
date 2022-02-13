@@ -377,67 +377,137 @@ namespace BankingProgramWPF
                   {
                       var date = DateTime.Now;
                       MainWindow.changedFields = "Изменено: ";
-                      if (string.IsNullOrEmpty(SelectedUser.Surname) || string.IsNullOrEmpty(SelectedUser.Name) || string.IsNullOrEmpty(SelectedUser.MiddleName))
+                      //if (string.IsNullOrEmpty(SelectedUser.Surname) || string.IsNullOrEmpty(SelectedUser.Name) || string.IsNullOrEmpty(SelectedUser.MiddleName))
+                      //{
+                      //    MessageBox.Show($"Необходимо выбрать пользователя и заполнить обязательные поля: Фамилия, Имя, отчество");
+                      //}
+                      //else
+                      //{
+                      //    if (selectedUserWPF == "Менеджер")
+                      //    {
+                      //        for (int i = 0; i < user.Count; i++)
+                      //        {
+                      //            if (user[i].Id == SelectedUser.Id && user[i].GetType() == typeof(Manager))
+                      //            {
+                      //                if (user[i].Surname != SurnameTranslate)
+                      //                {
+                      //                    MainWindow.changedFields += "Surname";
+                      //                }
+
+                      //                if (user[i].Name != NameTranslate)
+                      //                {
+                      //                    MainWindow.changedFields += ", Name";
+                      //                }
+
+                      //                if (user[i].MiddleName != MiddleNameTranslate)
+                      //                {
+                      //                    MainWindow.changedFields += ", MiddleName";
+                      //                }
+
+                      //                if (user[i].PhoneNumber != PhoneNumberTranslate)
+                      //                {
+                      //                    MainWindow.changedFields += ", PhoneNumber";
+                      //                }
+
+                      //                if (user[i].SeriesNumberPassport != SeriesNumberPassportTranslate)
+                      //                {
+                      //                    MainWindow.changedFields += ", SeriesNumberPassport";
+                      //                }
+
+                      //                ChangingParametersManager(Convert.ToString(SelectedUser.Id), SurnameTranslate, NameTranslate, MiddleNameTranslate, PhoneNumberTranslate, SeriesNumberPassportTranslate, MainWindow.changedFields);
+                      //            }
+                      //        }
+                      //        UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                      //        UserList = User;
+                      //    }
+
+                      //    if (selectedUserWPF == "Консультант")
+                      //    {
+                      //        for (int i = 0; i < user.Count; i++)
+                      //        {
+                      //            if (user[i].Id == Convert.ToUInt64(SelectedUser.Id) && user[i].GetType() == typeof(ConsultantUsers))
+                      //            {
+                      //                if (user[i].PhoneNumber != SelectedUser.PhoneNumber)
+                      //                {
+                      //                    MainWindow.changedFields += "PhoneNumber";
+                      //                }
+                      //                ChangingParametersConsultant(Convert.ToString(SelectedUser.Id), PhoneNumberTranslate, MainWindow.changedFields);
+                      //            }
+                      //        }
+                      //        UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
+                      //        UserList = User;
+                      //    }
+                      //}
+
+                      try
+                      {
+                          if (string.IsNullOrEmpty(SelectedUser.Surname) || string.IsNullOrEmpty(SelectedUser.Name) || string.IsNullOrEmpty(SelectedUser.MiddleName))
+                          {
+                              MessageBox.Show($"Необходимо выбрать пользователя и заполнить обязательные поля: Фамилия, Имя, отчество");
+                          }
+                          else
+                          {
+                              if (selectedUserWPF == "Менеджер")
+                              {
+                                  for (int i = 0; i < user.Count; i++)
+                                  {
+                                      if (user[i].Id == SelectedUser.Id && user[i].GetType() == typeof(Manager))
+                                      {
+                                          if (user[i].Surname != SurnameTranslate)
+                                          {
+                                              MainWindow.changedFields += "Surname";
+                                          }
+
+                                          if (user[i].Name != NameTranslate)
+                                          {
+                                              MainWindow.changedFields += ", Name";
+                                          }
+
+                                          if (user[i].MiddleName != MiddleNameTranslate)
+                                          {
+                                              MainWindow.changedFields += ", MiddleName";
+                                          }
+
+                                          if (user[i].PhoneNumber != PhoneNumberTranslate)
+                                          {
+                                              MainWindow.changedFields += ", PhoneNumber";
+                                          }
+
+                                          if (user[i].SeriesNumberPassport != SeriesNumberPassportTranslate)
+                                          {
+                                              MainWindow.changedFields += ", SeriesNumberPassport";
+                                          }
+
+                                          ChangingParametersManager(Convert.ToString(SelectedUser.Id), SurnameTranslate, NameTranslate, MiddleNameTranslate, PhoneNumberTranslate, SeriesNumberPassportTranslate, MainWindow.changedFields);
+                                      }
+                                  }
+                                  UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
+                                  UserList = User;
+                              }
+
+                              if (selectedUserWPF == "Консультант")
+                              {
+                                  for (int i = 0; i < user.Count; i++)
+                                  {
+                                      if (user[i].Id == Convert.ToUInt64(SelectedUser.Id) && user[i].GetType() == typeof(ConsultantUsers))
+                                      {
+                                          if (user[i].PhoneNumber != SelectedUser.PhoneNumber)
+                                          {
+                                              MainWindow.changedFields += "PhoneNumber";
+                                          }
+                                          ChangingParametersConsultant(Convert.ToString(SelectedUser.Id), PhoneNumberTranslate, MainWindow.changedFields);
+                                      }
+                                  }
+                                  UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
+                                  UserList = User;
+                              }
+                          }
+                      }
+                      catch (NullReferenceException)
                       {
                           MessageBox.Show($"Необходимо выбрать пользователя и заполнить обязательные поля: Фамилия, Имя, отчество");
                       }
-                      else
-                      {
-                          if (selectedUserWPF == "Менеджер")
-                          {
-                              for (int i = 0; i < user.Count; i++)
-                              {
-                                  if (user[i].Id == SelectedUser.Id && user[i].GetType() == typeof(Manager))
-                                  {
-                                      if (user[i].Surname != SurnameTranslate)
-                                      {
-                                          MainWindow.changedFields += "Surname";
-                                      }
 
-                                      if (user[i].Name != NameTranslate)
-                                      {
-                                          MainWindow.changedFields += ", Name";
-                                      }
-
-                                      if (user[i].MiddleName != MiddleNameTranslate)
-                                      {
-                                          MainWindow.changedFields += ", MiddleName";
-                                      }
-
-                                      if (user[i].PhoneNumber != PhoneNumberTranslate)
-                                      {
-                                          MainWindow.changedFields += ", PhoneNumber";
-                                      }
-
-                                      if (user[i].SeriesNumberPassport != SeriesNumberPassportTranslate)
-                                      {
-                                          MainWindow.changedFields += ", SeriesNumberPassport";
-                                      }
-
-                                      ChangingParametersManager(Convert.ToString(SelectedUser.Id), SurnameTranslate, NameTranslate, MiddleNameTranslate, PhoneNumberTranslate, SeriesNumberPassportTranslate, MainWindow.changedFields);
-                                  }
-                              }
-                              UserIntermediateValue = User.Where(us => us.GetType() == typeof(Manager)).ToList();
-                              UserList = User;
-                          }
-
-                          if (selectedUserWPF == "Консультант")
-                          {
-                              for (int i = 0; i < user.Count; i++)
-                              {
-                                  if (user[i].Id == Convert.ToUInt64(SelectedUser.Id) && user[i].GetType() == typeof(ConsultantUsers))
-                                  {
-                                      if (user[i].PhoneNumber != SelectedUser.PhoneNumber)
-                                      {
-                                          MainWindow.changedFields += "PhoneNumber";
-                                      }
-                                      ChangingParametersConsultant(Convert.ToString(SelectedUser.Id), PhoneNumberTranslate, MainWindow.changedFields);
-                                  }
-                              }
-                              UserIntermediateValue = User.Where(us => us.GetType() == typeof(ConsultantUsers)).ToList();
-                              UserList = User;
-                          }
-                      }
                   }));
             }
         }
