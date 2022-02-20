@@ -69,6 +69,10 @@ namespace BankingProgramWPF
                 removeAccountWPF.IsEnabled = true;
                 TransferСustomerAccountsWPF.IsEnabled = true;
                 TransferСustomerAccountsButtonWPF.IsEnabled = true;
+                AccountReplenishmentWPF.IsEnabled = true;
+                AccountReplenishmentButtonWPF.IsEnabled = true;
+                TransfersBetweenClientsWPF.IsEnabled = true;
+                TransfersBetweenClientsButtonWPF.IsEnabled = true;
             }
 
         }

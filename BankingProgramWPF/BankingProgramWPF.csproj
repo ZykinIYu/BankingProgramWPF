@@ -204,6 +204,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Accounts.cs" />
+    <Compile Include="Models\EnamAccountType.cs" />
     <Compile Include="ViewModels\Bindable.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />

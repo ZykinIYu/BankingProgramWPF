@@ -69,7 +69,25 @@ namespace BankingProgramWPF
                 accountsIntermediateValue = value;
                 OnPropertyChanged("AccountsIntermediateValue");
             }
-        }       
+        }
+
+        /// <summary>
+        /// Список пользователей промежуточный
+        /// </summary>
+        private List<Accounts<ulong, string, ulong>> accountsIntermediateValue2;
+
+        /// <summary>
+        /// Свойство списка пользователей промежуточного
+        /// </summary>
+        public List<Accounts<ulong, string, ulong>> AccountsIntermediateValue2
+        {
+            get { return accountsIntermediateValue2; }
+            set
+            {
+                accountsIntermediateValue2 = value;
+                OnPropertyChanged("AccountsIntermediateValue2");
+            }
+        }
 
         //Промежуточный список пользователей
         private List<IUsers> userIntermediateValue;
@@ -151,7 +169,7 @@ namespace BankingProgramWPF
         /// <summary>
         /// Тип счета
         /// </summary>
-        public List<string> AccountsTypes { get; set; } = new List<string> { "Недепозитный", "Депозитный" };
+        public List<string> AccountsTypes { get; set; } = new List<string> { Convert.ToString((EnamAccountType)0), Convert.ToString((EnamAccountType)1) };
 
         private ulong id;
         private Random randomize;
@@ -195,6 +213,7 @@ namespace BankingProgramWPF
             {
                 selectedAccounts = value;
                 AccountsIntermediateValue = Accounts.Where(a => value.Id == a.IdUser).ToList();
+                AccountsIntermediateValue2 = Accounts.Where(a => value.Id != a.IdUser).ToList();
                 OnPropertyChanged("SelectedAccounts");
             }
         }
@@ -247,6 +266,24 @@ namespace BankingProgramWPF
             }
         }
 
+        /// <summary>
+        /// выбор счета клиента
+        /// </summary>
+        private Accounts<ulong, string, ulong> selectedAccountList2;
+
+        /// <summary>
+        /// Свойство выбора счета клиента
+        /// </summary>
+        public Accounts<ulong, string, ulong> SelectedAccountList2
+        {
+            get { return selectedAccountList2; }
+            set
+            {
+                selectedAccountList2 = value;
+                OnPropertyChanged("SelectedAccountList2");
+            }
+        }
+
 
 
         /// <summary>
@@ -286,8 +323,8 @@ namespace BankingProgramWPF
         {
             for (ulong i = 1; i < 21; i++)
             {
-                Accounts.Add(new Accounts<ulong, string, ulong>(i, "Недепозитный", Convert.ToUInt64(randomize.Next(0, 100000))));
-                Accounts.Add(new Accounts<ulong, string, ulong>(i, "Депозитный", Convert.ToUInt64(randomize.Next(0, 100000))));
+                Accounts.Add(new Accounts<ulong, string, ulong>(i, Convert.ToString((EnamAccountType)0), Convert.ToUInt64(randomize.Next(0, 100000))));
+                Accounts.Add(new Accounts<ulong, string, ulong>(i, Convert.ToString((EnamAccountType)1), Convert.ToUInt64(randomize.Next(0, 100000))));
             }
         }
 
@@ -665,6 +702,85 @@ namespace BankingProgramWPF
         }
 
         /// <summary>
+        /// Команда зачисления средств на счет
+        /// </summary>
+        private RelayCommand accountReplenishmentButton;
+
+        /// <summary>
+        /// Свойство команды зачисления средств на счет
+        /// </summary>
+        public RelayCommand AccountReplenishmentButton
+        {
+            get
+            {
+                return accountReplenishmentButton ??
+                  (accountReplenishmentButton = new RelayCommand(obj =>
+                  {
+                      if (string.IsNullOrEmpty(Convert.ToString(SelectedAccountList.IdAccounts)))
+                      {
+                          MessageBox.Show("Необходимо выбрать счет на который будут зачислены средства");
+                      }
+                      else
+                      {
+                          if (string.IsNullOrEmpty(Convert.ToString(accountReplenishment)))
+                          {
+                              MessageBox.Show("Необходимо указать сумму к зачислению");
+                          }
+                          else
+                          {
+                              Accounts.FindAll(ac => ac.IdAccounts == SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance += Convert.ToUInt64(AccountReplenishment));
+                          }
+                      }
+                      AccountsIntermediateValue = Accounts.Where(a => SelectedAccounts.Id == a.IdUser).ToList();
+                  }));
+            }
+        }
+
+        /// <summary>
+        /// Команда перевода средств между клиентами
+        /// </summary>
+        private RelayCommand commandTransfersBetweenClientsWPF;
+
+        /// <summary>
+        /// Свойство команды перевода средств между клиентами
+        /// </summary>
+        public RelayCommand CommandTransfersBetweenClientsWPF
+        {
+            get
+            {
+                return commandTransfersBetweenClientsWPF ??
+                  (commandTransfersBetweenClientsWPF = new RelayCommand(obj =>
+                  {
+                      if (string.IsNullOrEmpty(Convert.ToString(SelectedAccountList.IdAccounts)) && string.IsNullOrEmpty(Convert.ToString(SelectedAccountList2.IdAccounts)))
+                      {
+                          MessageBox.Show("Необходимо выбрать счета для списания и зачисления");
+                      }
+                      else
+                      {
+                          if (string.IsNullOrEmpty(Convert.ToString(transferToTheClient)))
+                          {
+                              MessageBox.Show("Необходимо указать сумму перевода");
+                          }
+                          else
+                          {
+                              if (Convert.ToUInt64(SelectedAccountList.MoneyBalance) >= Convert.ToUInt64(transferToTheClient))
+                              {
+                                  Accounts.FindAll(ac => ac.IdAccounts == SelectedAccountList.IdAccounts).ForEach(ac => ac.MoneyBalance -= Convert.ToUInt64(transferToTheClient));
+                                  Accounts.FindAll(ac => ac.IdAccounts == SelectedAccountList2.IdAccounts).ForEach(ac => ac.MoneyBalance += Convert.ToUInt64(transferToTheClient));
+                              }
+                              else
+                              {
+                                  MessageBox.Show("Невозможно со счета снять денег больше чем там есть");
+                              }                              
+                          }
+                      }
+                      AccountsIntermediateValue = Accounts.Where(a => SelectedAccounts.Id == a.IdUser).ToList();
+                      AccountsIntermediateValue2 = Accounts.Where(a => SelectedAccounts.Id != a.IdUser).ToList();
+                  }));
+            }
+        }
+
+        /// <summary>
         /// Фамилия для передачи
         /// </summary>
         private string surnameTranslate;
@@ -796,5 +912,48 @@ namespace BankingProgramWPF
             }
         }
 
+        /// <summary>
+        /// Сумма для зачисления на счет
+        /// </summary>
+        private string accountReplenishment;
+
+        /// <summary>
+        /// Свойство Суммы для зачисления на счет
+        /// </summary>
+        public string AccountReplenishment
+        {
+            get
+            {
+                return accountReplenishment;
+            }
+
+            set
+            {
+                accountReplenishment = value;
+                OnPropertyChanged("AccountReplenishment");
+            }
+        }
+
+        /// <summary>
+        /// Сумма перевода клиенту
+        /// </summary>
+        private string transferToTheClient;
+
+        /// <summary>
+        /// Свойство суммы перевода клиенту
+        /// </summary>
+        public string TransferToTheClient
+        {
+            get
+            {
+                return transferToTheClient;
+            }
+
+            set
+            {
+                transferToTheClient = value;
+                OnPropertyChanged("TransferToTheClient");
+            }
+        }
     }
 }
