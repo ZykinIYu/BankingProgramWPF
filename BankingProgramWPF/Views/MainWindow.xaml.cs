@@ -4,6 +4,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Input;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace BankingProgramWPF
 {
@@ -75,6 +78,11 @@ namespace BankingProgramWPF
                 TransfersBetweenClientsButtonWPF.IsEnabled = true;
             }
 
+        }
+
+        private void phoneNumberTB_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
     }
 }
