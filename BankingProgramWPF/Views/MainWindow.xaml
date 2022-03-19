@@ -97,7 +97,10 @@
                         x:Name="phoneNumberTB"
                         Margin="10 0 10 10"
                         Text="{Binding PhoneNumberTranslate}"
-                        IsReadOnly="True" PreviewTextInput="phoneNumberTB_PreviewTextInput" />
+                        IsReadOnly="True" 
+                        PreviewTextInput="phoneNumberTB_PreviewTextInput"
+                        PreviewMouseRightButtonUp="phoneNumberTB_PreviewMouseRightButtonUp" 
+                        PreviewKeyDown="phoneNumberTB_PreviewKeyDown" />
 
                     <TextBlock 
                         Margin="10 0 10 10"
@@ -107,7 +110,8 @@
                         x:Name="seriesNumberPassportTB"
                         Margin="10 0 10 10"
                         Text="{Binding SeriesNumberPassportTranslate}"
-                        IsReadOnly="True" PreviewTextInput="phoneNumberTB_PreviewTextInput"/>
+                        IsReadOnly="True" PreviewTextInput="phoneNumberTB_PreviewTextInput"
+                        PreviewKeyDown="phoneNumberTB_PreviewKeyDown"/>
 
                     <Button 
                         x:Name="addUser"
@@ -254,7 +258,9 @@
                         x:Name="TransferСustomerAccountsWPF"
                         Margin="10 0 10 10"
                         IsEnabled="False"
-                        Text="{Binding TransferСustomerAccountsTranslate}" PreviewTextInput="phoneNumberTB_PreviewTextInput"/>
+                        Text="{Binding TransferСustomerAccountsTranslate}" 
+                        PreviewTextInput="phoneNumberTB_PreviewTextInput"
+                        PreviewKeyDown="phoneNumberTB_PreviewKeyDown"/>
 
                     <Button 
                         x:Name="TransferСustomerAccountsButtonWPF"
@@ -271,7 +277,9 @@
                         x:Name="AccountReplenishmentWPF"
                         Margin="10 0 10 10"
                         IsEnabled="False"
-                        Text="{Binding AccountReplenishment}" PreviewTextInput="phoneNumberTB_PreviewTextInput"/>
+                        Text="{Binding AccountReplenishment}" 
+                        PreviewTextInput="phoneNumberTB_PreviewTextInput"
+                        PreviewKeyDown="phoneNumberTB_PreviewKeyDown"/>
 
                     <Button 
                         x:Name="AccountReplenishmentButtonWPF"
@@ -288,7 +296,9 @@
                         x:Name="TransfersBetweenClientsWPF"
                         Margin="10 0 10 10"
                         IsEnabled="False"
-                        Text="{Binding TransferToTheClient}" PreviewTextInput="phoneNumberTB_PreviewTextInput"/>
+                        Text="{Binding TransferToTheClient}" 
+                        PreviewTextInput="phoneNumberTB_PreviewTextInput"
+                        PreviewKeyDown="phoneNumberTB_PreviewKeyDown"/>
                     
                     <Button 
                         x:Name="TransfersBetweenClientsButtonWPF"

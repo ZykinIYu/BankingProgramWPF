@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Clipboard = System.Windows.Clipboard;
+using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 namespace BankingProgramWPF
@@ -80,9 +82,40 @@ namespace BankingProgramWPF
 
         }
 
+        /// <summary>
+        /// Запрет ввода текста в поле
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void phoneNumberTB_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
+
+        /// <summary>
+        /// Запрет открытия контекстного меню правой кнопкой мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void phoneNumberTB_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void phoneNumberTB_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && e.Key == Key.V)
+            {
+                e.Handled = true;
+                MessageBox.Show("Запрещено использовать сочетание клавиш \"CTRL + V\"");
+            }
+
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift && e.Key == Key.Insert)
+            {
+                e.Handled = true;
+                MessageBox.Show("Запрещено использовать сочетание клавиш \"SHIFT + INSERT\"");
+            }
+        }
+
     }
 }
